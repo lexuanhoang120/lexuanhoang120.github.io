@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CGAR GUI Grounding | Docs</title>
+  <link rel="stylesheet" href="project-pages.css" />
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html#projects">← Back to portfolio</a>
+
+    <article class="card">
+      <h1>CGAR: Confidence-Guided Adaptive Refinement for GUI Grounding</h1>
+      <p class="meta">Academic Manuscript · 2026.03 · CVPR 2026 Submission</p>
+
+      <p>
+        CGAR is a training-free refinement method for GUI grounding in computer-use agents.
+        It improves click-point prediction by using model confidence to decide whether a prediction
+        should be accepted directly or refined through an adaptive local crop.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/lexuanhoang120/Confidence-Guided-Adaptive-Refinement" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn" href="#approach">Approach</a>
+        <a class="btn" href="#results">Results</a>
+      </div>
+
+      <section id="approach" class="section">
+        <h2>Approach</h2>
+
+        <p>
+          GUI agents often fail when they click the wrong UI element, especially on dense and high-resolution
+          screens. Traditional reflection methods try to fix mistakes after execution, but this can be expensive
+          and may already change the interface state. CGAR instead improves the prediction before execution.
+        </p>
+
+        <h3>Core Idea</h3>
+        <p>
+          CGAR uses the confidence score from an attention-based GUI grounding model as a control signal.
+          If the model is confident, the prediction is finalized. If confidence is low, CGAR crops around the
+          predicted area and asks the model to predict again on the clearer local view.
+        </p>
+
+        <h3>High-Level Workflow</h3>
+        <ol>
+          <li>Input a GUI screenshot and natural-language instruction.</li>
+          <li>Predict an initial target point from the full screenshot.</li>
+          <li>Estimate confidence from the attention map around the prediction.</li>
+          <li>Stop early if the confidence is high enough.</li>
+          <li>Otherwise, crop around the predicted point and refine the prediction.</li>
+          <li>Repeat until confidence is high or the maximum refinement depth is reached.</li>
+        </ol>
+
+        <h3>What Makes It Useful</h3>
+        <ul>
+          <li><strong>Training-free:</strong> improves inference without retraining the base model.</li>
+          <li><strong>Confidence-guided:</strong> refines only uncertain predictions instead of applying fixed refinement to every case.</li>
+          <li><strong>Adaptive cropping:</strong> uses larger crops for uncertain cases and tighter crops when the model becomes more confident.</li>
+          <li><strong>Better dense-screen grounding:</strong> helps localize small or visually similar UI elements in complex layouts.</li>
+        </ul>
+
+        <h3>Evaluation Scope</h3>
+        <ul>
+          <li><strong>Models:</strong> GUI-Actor and V2P.</li>
+          <li><strong>Benchmarks:</strong> ScreenSpot-V2, ScreenSpot-Pro, and UI-Vision.</li>
+          <li><strong>Metric:</strong> grounding accuracy, based on whether the predicted point falls inside the target bounding box.</li>
+        </ul>
+      </section>
+
+      <section id="results" class="section">
+        <h2>Results</h2>
+
+        <p>
+          CGAR delivered the strongest improvements on dense, high-resolution GUI benchmarks.
+          The gain was smaller on ScreenSpot-V2 because the baseline performance was already high.
+        </p>
+
+        <h3>Main Results</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Dataset</th>
+              <th>Baseline</th>
+              <th>CGAR</th>
+              <th>Gain</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GUI-Actor-7B</td>
+              <td>ScreenSpot-Pro</td>
+              <td>44.6%</td>
+              <td>60.5%</td>
+              <td>+15.9%</td>
+            </tr>
+            <tr>
+              <td>V2P-7B</td>
+              <td>ScreenSpot-Pro</td>
+              <td>50.5%</td>
+              <td>64.2%</td>
+              <td>+13.7%</td>
+            </tr>
+            <tr>
+              <td>GUI-Actor-7B</td>
+              <td>UI-Vision</td>
+              <td>21.4%</td>
+              <td>31.0%</td>
+              <td>+9.6%</td>
+            </tr>
+            <tr>
+              <td>V2P-7B</td>
+              <td>UI-Vision</td>
+              <td>23.8%</td>
+              <td>33.9%</td>
+              <td>+10.1%</td>
+            </tr>
+            <tr>
+              <td>GUI-Actor-3B</td>
+              <td>ScreenSpot-Pro</td>
+              <td>42.2%</td>
+              <td>56.4%</td>
+              <td>+14.2%</td>
+            </tr>
+            <tr>
+              <td>GUI-Actor-3B</td>
+              <td>UI-Vision</td>
+              <td>19.3%</td>
+              <td>26.0%</td>
+              <td>+6.7%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Key Takeaways</h3>
+        <ul>
+          <li>CGAR significantly improved GUI grounding without additional model training.</li>
+          <li>V2P-7B + CGAR reached <strong>64.2%</strong> on ScreenSpot-Pro, outperforming several larger models reported in the paper.</li>
+          <li>GUI-Actor-3B + CGAR outperformed the baseline GUI-Actor-7B on ScreenSpot-Pro and UI-Vision.</li>
+          <li>Compared with fixed-scale refinement, CGAR was more stable because it adapts the crop size based on confidence.</li>
+          <li>The method is most useful for dense professional interfaces where the first full-screen prediction is often uncertain.</li>
+        </ul>
+
+        <h3>Limitations</h3>
+        <p>
+          CGAR depends on the initial prediction as the starting point, so very poor first predictions can still
+          be difficult to recover from. It also adds extra inference steps, although confidence-based stopping
+          helps reduce unnecessary refinement.
+        </p>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCTV Video Filtering | Project Demo & Docs</title>
+  <link rel="stylesheet" href="project-pages.css" />
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html#projects">← Back to portfolio</a>
+
+    <article class="card">
+      <h1>VLM-Based CCTV Video Filtering</h1>
+      <p class="meta">PIA Space · 2025.12 - 2026.02</p>
+
+      <p>
+        A VLM-based pipeline for building CCTV anomaly datasets from web videos. The system searches
+        for candidate videos, filters surveillance-style footage, and extracts short anomaly clips for
+        classes such as fire, smoke, violence, and falldown.
+      </p>
+      <p>
+        This project was carried out as an internship task at
+        <a href="https://www.pia.space/" target="_blank" rel="noreferrer">PIA Space</a>,
+        assigned through the Vision Language Intelligence Laboratory.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/lexuanhoang120/CCTV-Video-Search-Agent-thangdd_downloader" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn" href="#demo">Demo</a>
+        <a class="btn" href="#approach">Approach</a>
+        <a class="btn" href="#results">Results</a>
+      </div>
+
+      <section id="demo" class="section">
+        <h2>Demo</h2>
+
+        <p>
+          The demo shows how a user query is converted into a cleaner CCTV anomaly dataset:
+          download candidate videos, keep only CCTV footage, then extract short clips that contain
+          the target event.
+        </p>
+
+        <h3>High-Level Flow</h3>
+        <ol>
+          <li>Input an anomaly class such as <code>fire</code>, <code>smoke</code>, <code>violence</code>, or <code>falldown</code>.</li>
+          <li>Generate search queries and download candidate videos.</li>
+          <li>Sample representative frames from each video.</li>
+          <li>Use VLM prompts to classify CCTV vs. non-CCTV footage.</li>
+          <li>Run anomaly detection on filtered CCTV videos.</li>
+          <li>Save short event clips into class-specific folders.</li>
+        </ol>
+
+        <h3>Goal</h3>
+        <ul>
+          <li>Find useful CCTV videos from noisy web search results.</li>
+          <li>Reduce manual annotation cost for rare anomaly events.</li>
+          <li>Create 1-5 second anomaly clips with visual evidence.</li>
+          <li>Target 20-30 useful videos per class.</li>
+        </ul>
+      </section>
+
+      <section id="approach" class="section">
+        <h2>Approach</h2>
+
+        <p>
+          The project is organized into three modules: downloader, filtering, and refinement.
+          Together, they form an end-to-end workflow for CCTV anomaly dataset construction.
+        </p>
+
+        <h3>Downloader</h3>
+        <p>
+          Searches the web for videos related to the target anomaly. LLM-generated queries improve
+          coverage by using CCTV-specific terms such as surveillance camera, security footage, fixed
+          camera, and incident context.
+        </p>
+
+        <h3>Filtering</h3>
+        <p>
+          Removes non-CCTV videos before downstream processing. The module samples frames from each
+          video and uses VLM-based VQA prompts to decide whether the video is surveillance footage.
+          A grayscale-difference heuristic was also tested as a lightweight baseline.
+        </p>
+
+        <h3>Refinement</h3>
+        <p>
+          Splits full CCTV videos into short anomaly clips. The module samples 64 frames, asks a VLM
+          to identify frames containing Fire, Smoke, Violence, or Falldown, maps detected frame IDs to
+          timestamps, and cuts clips around the detected moments.
+        </p>
+      </section>
+
+      <section id="results" class="section">
+        <h2>Results</h2>
+
+        <p>
+          The filtering module was tested with InternVL3 and Qwen3-VL models across multiple prompts.
+          Prompt design had a strong impact on accuracy.
+        </p>
+
+        <h3>CCTV Filtering</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>Best Model</th>
+              <th>Processed</th>
+              <th>Best Accuracy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Small labeled test set</td>
+              <td>Qwen3-VL-2B</td>
+              <td>18</td>
+              <td>94.44%</td>
+            </tr>
+            <tr>
+              <td>Company CCTV dataset</td>
+              <td>InternVL3-2B</td>
+              <td>425</td>
+              <td>83.53%</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <h3>Key Takeaways</h3>
+<ul>
+  <li>Built a three-stage pipeline for web video search, CCTV filtering, and anomaly clip extraction.</li>
+  <li>Qwen3-VL-2B achieved <strong>94.44%</strong> accuracy on the small CCTV filtering test set.</li>
+  <li>InternVL3-2B achieved <strong>83.53%</strong> accuracy on the larger CCTV-only dataset.</li>
+  <li>Prompt design strongly affected CCTV filtering performance across models.</li>
+</ul>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

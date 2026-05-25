@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crawl Lyrics Category | Project Docs</title>
+  <link rel="stylesheet" href="project-pages.css" />
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html#projects">← Back to portfolio</a>
+
+    <article class="card">
+      <h1>Crawl Lyrics Category</h1>
+      <p class="meta">VTCODE Company · 2022.08</p>
+
+      <p>
+        A Selenium-based crawler that searches for a song by its title and singer,
+        then collects the lyrics and category information from music websites.
+      </p>
+
+      <div class="actions">
+        <a
+          class="btn primary"
+          href="https://github.com/lexuanhoang120/Crawl_Lyrics_Category"
+          target="_blank"
+          rel="noreferrer"
+        >
+          GitHub
+        </a>
+        <a class="btn" href="#approach">View Approach</a>
+      </div>
+
+      <section class="section">
+        <h2>Demo Preview</h2>
+
+        <div class="demo-gallery">
+          <figure>
+            <img
+              src="https://user-images.githubusercontent.com/83819024/217485311-33dc0c82-2b2b-4675-940e-63570e1ee928.png"
+              alt="Song and singer input form"
+            />
+            <figcaption>Users enter the song name and singer name.</figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="https://user-images.githubusercontent.com/83819024/217482835-62706923-ba5d-4e91-bcd8-48460ea0a739.png"
+              alt="Crawler output showing lyrics and category"
+            />
+            <figcaption>The crawler returns lyrics and category information.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="approach" class="section">
+        <h2>Approach</h2>
+        <ul>
+          <li>Used Selenium to automate browser actions.</li>
+          <li>Searched songs based on title and singer name.</li>
+          <li>Opened the most relevant song page.</li>
+          <li>Extracted lyrics and category information.</li>
+          <li>Cleaned and displayed the final result.</li>
+        </ul>
+      </section>
+
+      <section id="crawling" class="section">
+        <h2>Crawling Demo</h2>
+        <p>
+          The crawler opens the browser, searches for the song, and collects the needed
+          information from the result page.
+        </p>
+
+        <figure class="media-block">
+          <video controls>
+            <source
+              src="https://user-images.githubusercontent.com/83819024/217488948-4385bf1b-6383-4b4c-81ab-470087de2463.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+          <figcaption>Demo of the crawling workflow.</figcaption>
+        </figure>
+      </section>
+
+      <section id="setup" class="section">
+        <h2>Setup</h2>
+        <ul>
+          <li>Install packages with <code>pip install -r requirements.txt</code>.</li>
+          <li>Download a webdriver that matches your browser version.</li>
+          <li>Open and run the <code>.ipynb</code> file with Jupyter Notebook.</li>
+        </ul>
+      </section>
+
+      <section id="notes" class="section">
+        <h2>Notes</h2>
+        <ul>
+          <li>The webdriver version should match your browser version.</li>
+          <li>Website XPath values may change over time.</li>
+          <li>If the crawler stops working, inspect the website structure again.</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Face Recognition | Project Docs</title>
+  <link rel="stylesheet" href="project-pages.css" />
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html#projects">← Back to portfolio</a>
+
+    <article class="card">
+      <h1>Web Face Recognition</h1>
+      <p class="meta">VTCODE Company · 2022.10</p>
+
+      <p>
+        A full-stack web application for face recognition, built with a FastAPI backend,
+        a browser-based frontend, and MongoDB for storing user and recognition data.
+        The project connects face recognition inference with practical web workflows such as
+        login, user listing, profile information, and database management.
+      </p>
+      <p>
+        <strong>Role note:</strong> I was responsible for the backend side (API and data workflow).
+        The frontend interface was developed by other team members.
+        <strong>Project status:</strong> Pending.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/lexuanhoang120/Web_Face_Recognition" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn" href="#demo">Demo</a>
+        <a class="btn" href="#approach">Approach</a>
+        <a class="btn" href="#results">Results</a>
+      </div>
+
+  <section id="demo" class="section">
+  <h2>Demo</h2>
+
+  <p>
+    The demo shows the main workflows of the face recognition web application:
+    login, user list management, profile information, and
+    MongoDB-backed data storage.
+  </p>
+
+  <h3>Login</h3>
+  <p>
+    Users start from the login interface before accessing the recognition dashboard.
+  </p>
+
+  <div class="media-grid">
+    <figure class="media-block">
+      <img
+        src="https://user-images.githubusercontent.com/83819024/219291144-c7dea7b3-74b6-4705-bd0c-e83555d58abf.png"
+        alt="Web Face Recognition login screen"
+      />
+      <figcaption>Login screen for the face recognition system.</figcaption>
+    </figure>
+
+    <figure class="media-block">
+      <img
+        src="https://user-images.githubusercontent.com/83819024/219291300-eb970e6f-8644-4a2f-9b17-53ebf88074a2.png"
+        alt="Web Face Recognition login interface"
+      />
+      <figcaption>Authentication interface before entering the dashboard.</figcaption>
+    </figure>
+  </div>
+
+  <h3>User List</h3>
+  <p>
+    The list page displays registered or recognized users and supports browsing user records
+    through the web interface.
+  </p>
+
+  <figure class="media-block">
+    <video controls preload="metadata">
+      <source
+        src="https://user-images.githubusercontent.com/83819024/219294189-f7c72dd0-68d4-496a-972e-9f66c47618ac.mp4"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
+    <figcaption>Demo of the user list and main dashboard workflow.</figcaption>
+  </figure>
+
+  <h3>User Information</h3>
+  <p>
+    The information page allows users to view or add profile details connected to
+    face recognition records.
+  </p>
+
+  <figure class="media-block">
+    <video controls preload="metadata">
+      <source
+        src="https://user-images.githubusercontent.com/83819024/219295263-91ab9f04-d578-40b1-81ae-ef6fc8ede389.mp4"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
+    <figcaption>Demo of adding and managing user information.</figcaption>
+  </figure>
+
+  <h3>Database</h3>
+  <p>
+    MongoDB is used to store user profiles, recognition records, and related system data.
+  </p>
+
+  <div class="media-grid">
+    <figure class="media-block">
+      <img
+        src="https://user-images.githubusercontent.com/83819024/219296179-f8bf4c58-e320-432d-834f-b51c4b2585cd.png"
+        alt="MongoDB database screenshot for Web Face Recognition"
+      />
+      <figcaption>MongoDB collection view for stored records.</figcaption>
+    </figure>
+
+    <figure class="media-block">
+      <img
+        src="https://user-images.githubusercontent.com/83819024/219296233-bc5526d0-87e2-4573-98ee-474e191bc9fd.png"
+        alt="MongoDB user data screenshot"
+      />
+      <figcaption>Stored user and recognition-related data.</figcaption>
+    </figure>
+
+    <figure class="media-block">
+      <img
+        src="https://user-images.githubusercontent.com/83819024/219296282-93dde65e-f743-44c1-a494-0e8c1a0270a6.png"
+        alt="MongoDB document screenshot"
+      />
+      <figcaption>Example database document structure.</figcaption>
+    </figure>
+
+    <figure class="media-block">
+      <img
+        src="https://user-images.githubusercontent.com/83819024/219289835-34dd5d84-49c5-4158-aaec-39b8a1fee7ff.png"
+        alt="MongoDB database management screenshot"
+      />
+      <figcaption>Database-backed management for the web application.</figcaption>
+    </figure>
+  </div>
+
+  <h3>Main Features</h3>
+  <ul>
+    <li><strong>Login:</strong> authentication interface for accessing the system.</li>
+    <li><strong>List:</strong> view registered or recognized users.</li>
+    <li><strong>Information:</strong> add and manage user profile details.</li>
+    <li><strong>Database:</strong> store user and recognition data using MongoDB.</li>
+  </ul>
+</section>
+
+      <section id="approach" class="section">
+        <h2>Approach</h2>
+
+        <p>
+          The project separates the backend and frontend so recognition logic, database operations,
+          and user interaction can be managed cleanly.
+        </p>
+
+        <h3>System Design</h3>
+        <ul>
+          <li><strong>Backend:</strong> FastAPI service for recognition-related API logic.</li>
+          <li><strong>Frontend:</strong> web interface for login, list, information.</li>
+          <li><strong>Database:</strong> MongoDB for storing user and recognition records.</li>
+          <li><strong>Workflow:</strong> user action → API request → data processing → database update → frontend display.</li>
+        </ul>
+      </section>
+
+      <section id="results" class="section">
+        <h2>Results</h2>
+
+        <p>
+          The project produced a working web prototype that integrates face recognition workflows
+          with a browser interface and database-backed user management.
+        </p>
+
+        <h3>Key Takeaways</h3>
+        <ul>
+          <li>Built a full-stack face recognition web application.</li>
+          <li>Implemented a FastAPI backend for web-based recognition workflows.</li>
+          <li>Used MongoDB to manage user and recognition-related records.</li>
+          <li>Created demo flows for login, user list, information, and adding new information.</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

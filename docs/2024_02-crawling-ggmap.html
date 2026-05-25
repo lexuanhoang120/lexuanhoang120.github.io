@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Maps Business Scraper | Project Docs</title>
+  <link rel="stylesheet" href="project-pages.css" />
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html#projects">← Back to portfolio</a>
+
+    <article class="card">
+      <h1>Google Maps Business Scraper</h1>
+      <p class="meta">CADS - FPT Corporation · 2024.02</p>
+
+      <p>
+        A Selenium-based crawling project for collecting business phone numbers
+        from Google Maps using keyword, ward, and district search combinations.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/lexuanhoang120/Google-Maps-Business-Scraper" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn" href="#approach">View Approach</a>
+      </div>
+
+      <section id="overview" class="section">
+        <h2>Project Overview</h2>
+        <p>
+          The project reads search inputs from an Excel file, builds Google Maps
+          search URLs, crawls business results, extracts phone numbers, and saves
+          the data into structured CSV files.
+        </p>
+      </section>
+
+      <section id="approach" class="section">
+        <h2>Approach</h2>
+        <ul>
+          <li>Read keywords, wards, and districts from <code>dvdc.xlsx</code>.</li>
+          <li>Built Google Maps search links for each location-based query.</li>
+          <li>Used Selenium Chrome to open pages and scroll through result lists.</li>
+          <li>Extracted phone numbers using XPath selectors.</li>
+          <li>Saved results into separate CSV files for each search combination.</li>
+        </ul>
+      </section>
+
+
+      <section id="results" class="section">
+        <h2>Results</h2>
+        <ul>
+          <li>Generated <strong>16,623</strong> CSV files from Google Maps crawling.</li>
+          <li>Collected <strong>364,191</strong> phone-record rows from Google Maps outputs.</li>
+          <li>Found <strong>108,675</strong> unique phone values in the main output folder.</li>
+          <li>Across all CSV outputs, collected <strong>709,481</strong> rows and <strong>183,939</strong> unique phone values.</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

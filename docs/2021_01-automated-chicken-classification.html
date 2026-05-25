@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automated Chicken Classification | Project Demo & Docs</title>
+  <link rel="stylesheet" href="project-pages.css" />
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html#projects">← Back to portfolio</a>
+
+    <article class="card">
+      <h1>Automated Chicken Classification System</h1>
+      <p class="meta">HCMUT Control and Automation Lab · 2021.01 - 2022.06</p>
+
+      <p>
+        A thesis project focused on analyzing and designing an automated chicken gender classification system.
+        The project combines computer vision, self-collected farm image data, model training and evaluation,
+        mechanical design for separating chickens individually from a flock, and electrical/control design for
+        supporting the sorting mechanism.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/lexuanhoang120/Thesis-Design-a-system-classifying-chicken-gender" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn" href="#docs">Go to Approach</a>
+        <a class="btn" href="#dataset">Dataset</a>
+      </div>
+
+      <section id="demo" class="section">
+        <h2>Demo</h2>
+
+        <p>
+          The demo presents the full workflow of a chicken gender classification system, from collecting raw
+          chicken images at a farm to training a classification model and connecting the prediction output with
+          a proposed mechatronic sorting system.
+        </p>
+
+        <div class="demo-gallery">
+          <figure>
+            <img src="https://user-images.githubusercontent.com/83819024/236599165-c0d95c0f-dcd1-41e1-a307-a376479f204d.png" alt="Chicken gender classification problem overview" />
+            <figcaption>Classification problem: identify chicken gender from image input.</figcaption>
+          </figure>
+
+          <figure>
+            <img src="https://user-images.githubusercontent.com/83819024/236599172-6d080401-30e6-42ec-a1b2-21921eed07b0.png" alt="Implementation planning for chicken gender classification system" />
+            <figcaption>Implementation planning for the full classification and automation workflow.</figcaption>
+          </figure>
+
+          <figure>
+            <img src="https://user-images.githubusercontent.com/83819024/236599177-19d68535-0ac4-4374-a653-9cdbac35d873.png" alt="Dataset building process for chicken gender classification" />
+            <figcaption>Dataset construction using self-collected chicken images from a farm.</figcaption>
+          </figure>
+
+          <figure>
+            <img src="https://user-images.githubusercontent.com/83819024/236599227-c4ac61c5-38ff-485c-a9b3-18472feb7516.png" alt="Model structure for chicken gender classification" />
+            <figcaption>Model structure for image-based chicken gender prediction.</figcaption>
+          </figure>
+
+          <figure>
+  <img src="https://user-images.githubusercontent.com/83819024/236599320-279f8d31-0b83-4fcb-a81d-a6b3ce3d4355.png" alt="Experiment setup for chicken gender classification model" />
+  <figcaption>Experiment setup and model testing process for chicken gender classification.</figcaption>
+</figure>
+
+
+          <figure>
+            <img src="https://user-images.githubusercontent.com/83819024/236599264-bdd776b2-a072-4a44-9e29-97bbdbd7e501.png" alt="Evaluation process for chicken gender classification model" />
+            <figcaption>Evaluation setup for measuring model performance.</figcaption>
+          </figure>
+
+          <figure>
+            <img src="https://user-images.githubusercontent.com/83819024/236599350-3967a6b2-cd92-417b-a729-1bb35794b05d.png" alt="Classification model result for chicken gender classification" />
+            <figcaption>Experiment result and model performance summary.</figcaption>
+          </figure>
+
+          <figure>
+            <img src="https://user-images.githubusercontent.com/83819024/236599390-b852b9cd-c97b-4e6e-906f-d481cfc01068.png" alt="Mechanical model for separating chickens one by one" />
+            <figcaption>Mechanical model for separating chickens individually from a flock.</figcaption>
+          </figure>
+
+          <figure>
+            <img src="https://user-images.githubusercontent.com/83819024/236599413-a086f840-9c2a-4db3-a22d-b5091e196978.png" alt="Electrical model for automated chicken sorting system" />
+            <figcaption>Electrical/control model supporting the automated sorting mechanism.</figcaption>
+          </figure>
+        </div>
+
+        <h3>Demo Flow</h3>
+        <ol>
+          <li>Collect raw chicken images from a real farm environment.</li>
+          <li>Build and label the dataset for chicken gender classification.</li>
+          <li>Preprocess images and prepare train/evaluation data.</li>
+          <li>Train an image-based classification model.</li>
+          <li>Evaluate the model using experiment results and performance analysis.</li>
+          <li>Use the classification output as the decision signal for the sorting system.</li>
+          <li>Route the chicken through a mechanical separation model controlled by the electrical system.</li>
+        </ol>
+
+        <h3>Demo Highlights</h3>
+        <ul>
+          <li><strong>Problem:</strong> classify chicken gender automatically from image data.</li>
+          <li><strong>Data:</strong> custom dataset collected directly from a farm.</li>
+          <li><strong>AI component:</strong> image-classification model for chicken gender prediction.</li>
+          <li><strong>Mechanical component:</strong> mechanism design for separating chickens one by one from a flock.</li>
+          <li><strong>Electrical component:</strong> electrical/control model for actuating the mechanical sorting system.</li>
+          <li><strong>Application:</strong> reduce manual classification effort and support poultry-farm automation.</li>
+        </ul>
+      </section>
+
+      <section id="docs" class="section">
+        <h2>Approach</h2>
+
+        <h3>Project Objective</h3>
+        <p>
+          The objective of this thesis was to design an end-to-end system for chicken gender classification.
+          Instead of focusing only on a machine learning model, the project also considered the physical
+          automation system required to separate chickens, capture or process visual information, classify
+          gender, and control sorting behavior.
+        </p>
+
+        <h3>Classification Problem</h3>
+        <p>
+          The core AI task is an image classification problem: given an input image of a chicken, the system
+          predicts the chicken's gender. This classification result is then used as an input signal for the
+          downstream mechanical sorting process.
+        </p>
+
+        <h3>Implementation Planning</h3>
+        <ul>
+          <li>Defined the classification problem and system requirements.</li>
+          <li>Collected real-world chicken images from a farm.</li>
+          <li>Prepared the dataset for training and evaluation.</li>
+          <li>Designed the model structure and experiment plan.</li>
+          <li>Evaluated classification performance and documented results.</li>
+          <li>Proposed improvements for future model and system development.</li>
+          <li>Designed mechanical and electrical models for the complete automation concept.</li>
+        </ul>
+
+        <h3>Dataset Construction</h3>
+        <p>
+          The dataset was collected manually from a farm, making the project closer to a real-world applied
+          computer vision problem. The dataset-building process included collecting raw images, preparing usable
+          samples, organizing data for training, and documenting the dataset for reuse.
+        </p>
+
+        <h3>Model Structure</h3>
+        <p>
+          The project includes a model structure for chicken gender classification using image input. The model
+          pipeline covers data preparation, training, inference, evaluation, experiment comparison, and result
+          analysis.
+        </p>
+
+        <h3>Evaluation and Experiments</h3>
+        <ul>
+          <li>Evaluated model predictions on prepared chicken image data.</li>
+          <li>Compared experimental results to understand model behavior.</li>
+          <li>Analyzed classification performance and error cases.</li>
+          <li>Documented improvement directions for better accuracy and robustness.</li>
+        </ul>
+
+        <h3>Mechanical Model</h3>
+        <p>
+          The mechanical part of the thesis proposes a system for separating chickens individually from a flock.
+          This is important because the classification system needs each chicken to be processed separately before
+          the sorting decision can be applied.
+        </p>
+
+        <ul>
+          <li>Designed a mechanism to guide chickens one by one through the system.</li>
+          <li>Considered the physical movement required before classification and sorting.</li>
+          <li>Connected the classification result with the sorting direction of the mechanism.</li>
+        </ul>
+
+        <h3>Electrical and Control Model</h3>
+        <p>
+          The electrical model supports the operation of the mechanical system. It provides the control logic
+          required to trigger actuators or sorting components based on the predicted chicken gender.
+        </p>
+
+        <ul>
+          <li>Designed the electrical/control concept for the mechanical model.</li>
+          <li>Linked model inference output to control decisions.</li>
+          <li>Planned the automation flow from image classification to physical sorting.</li>
+        </ul>
+
+        <h3>Key Contributions</h3>
+        <ul>
+          <li>Designed a complete chicken gender classification system as a thesis project.</li>
+          <li>Collected a custom chicken image dataset from a real farm.</li>
+          <li>Built a computer vision workflow for image-based chicken gender prediction.</li>
+          <li>Documented the classification problem, model structure, experiments, evaluation, and results.</li>
+          <li>Proposed improvement directions for future model performance and system reliability.</li>
+          <li>Designed a mechanical model for separating chickens individually from a flock.</li>
+          <li>Designed an electrical/control model to support the automated sorting mechanism.</li>
+        </ul>
+      </section>
+
+      <section id="dataset" class="section">
+        <h2>Dataset and Materials</h2>
+
+        <p>
+          All datasets and supporting project materials were prepared and published separately for reproducibility.
+        </p>
+
+        <ul>
+          <li>
+            <strong>Processed Dataset:</strong>
+            <a href="https://www.kaggle.com/datasets/hongxun/dataset-chicken-gender" target="_blank" rel="noreferrer">
+              dataset-chicken-gender
+            </a>
+          </li>
+          <li>
+            <strong>Raw Data:</strong>
+            <a href="https://www.kaggle.com/datasets/hongxun/raw-data-chicken-gender" target="_blank" rel="noreferrer">
+              raw-data-chicken-gender
+            </a>
+          </li>
+          <li>
+            <strong>Trained Model:</strong>
+            <a href="https://www.kaggle.com/datasets/hongxun/classify-chicken-gender" target="_blank" rel="noreferrer">
+              classify-chicken-gender
+            </a>
+          </li>
+          <li>
+            <strong>Full Materials:</strong>
+            <a href="https://www.kaggle.com/datasets/hongxun/material-classify-chicken-gender" target="_blank" rel="noreferrer">
+              material-classify-chicken-gender
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section id="results" class="section">
+        <h2>Results</h2>
+        <ul>
+          <li>Validated the project pipeline with implementation-level tests and example scenarios.</li>
+          <li>Documented key outputs, observed behavior, and practical limitations for deployment or research reuse.</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
