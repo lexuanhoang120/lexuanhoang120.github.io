@@ -3,190 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DART GUI Grounding | Project Demo & Docs</title>
+  <title>DART — GUI Grounding | Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
   <main class="page">
     <a class="back" href="../index.html#projects">← Back to portfolio</a>
-
     <article class="card">
-      <h1>DART for GUI Grounding</h1>
-      <p class="meta">Vision Language Intelligence Lab · 2026.05 · First-author research</p>
-
+      <h1>DART: Density-Aware Adaptive Refinement for GUI Grounding</h1>
+      <p class="meta">Sejong University VLI Lab · 2026.05 · First Author · Under Review at IEEE Access</p>
       <p>
-        DART is a training-free refinement method for GUI grounding in computer-use agents.
-        It improves click-point prediction by using attention density as a confidence signal,
-        then adaptively refining uncertain regions before the agent takes action.
+        A <strong>training-free</strong> adaptive refinement method for GUI grounding in computer-use agents.
+        DART uses <strong>attention map density</strong> from intermediate VLM layers as a signal to determine
+        when to stop and how to crop. On ScreenSpot-Pro, improves <strong>KV-Ground-8B from 73.0% to 80.9%</strong> —
+        achieving <strong>top-1 leaderboard</strong> performance competitive with much larger models.
+        Works with both attention-based and direct-coordinate-prediction models.
       </p>
 
       <div class="actions">
         <a class="btn primary" href="https://github.com/lexuanhoang120/Density-Aware-Adaptive-Refinement-Technique" target="_blank" rel="noreferrer">GitHub</a>
         <a class="btn" href="#demo">Demo</a>
-        <a class="btn" href="#approach">Approach</a>
         <a class="btn" href="#results">Results</a>
       </div>
 
       <section id="demo" class="section">
         <h2>Demo</h2>
-
-        <p>
-          Given a screenshot and an instruction, DART first predicts a target UI location. If the
-          model is uncertain, it crops around the predicted area, re-runs grounding on the clearer
-          local view, and repeats until the prediction becomes confident enough.
-        </p>
-
         <div class="demo-gallery">
           <figure>
-            <img
-              src="https://raw.githubusercontent.com/lexuanhoang120/Density-Aware-Adaptive-Refinement-Technique/main/demo.png"
-              alt="DART demo showing adaptive refinement workflow for GUI grounding"
-            />
-            <figcaption>DART demo overview from the project repository.</figcaption>
+            <img src="https://raw.githubusercontent.com/lexuanhoang120/Density-Aware-Adaptive-Refinement-Technique/main/docs/demo.png" alt="DART adaptive refinement workflow" loading="lazy" />
+            <figcaption>Adaptive refinement: when attention is dispersed → crop and re-run. When concentrated → stop. <em>n</em> = refinement steps.</figcaption>
           </figure>
           <figure>
-            <img
-              src="https://raw.githubusercontent.com/lexuanhoang120/Density-Aware-Adaptive-Refinement-Technique/main/demo2.png"
-              alt="Second DART demo view with additional refinement examples"
-            />
-            <figcaption>Additional DART demo examples from the project repository.</figcaption>
+            <img src="https://raw.githubusercontent.com/lexuanhoang120/Density-Aware-Adaptive-Refinement-Technique/main/docs/demo2.png" alt="Additional DART examples" loading="lazy" />
+            <figcaption>Additional examples across different GUI scenarios and models.</figcaption>
           </figure>
         </div>
-
-        <h3>High-Level Flow</h3>
-        <ol>
-          <li>Input a GUI screenshot and natural-language instruction.</li>
-          <li>Predict an initial target point from the full screenshot.</li>
-          <li>Measure confidence from the attention density around the prediction.</li>
-          <li>Stop early if confidence is high.</li>
-          <li>Otherwise, crop around the target and refine the prediction.</li>
-          <li>Map the final local prediction back to the original screenshot.</li>
-        </ol>
-
-        <h3>Why It Matters</h3>
-        <ul>
-          <li><strong>More reliable agents:</strong> reduces wrong clicks before execution.</li>
-          <li><strong>Better dense-GUI grounding:</strong> helps with small and crowded UI elements.</li>
-          <li><strong>No extra training:</strong> works as an inference-time refinement strategy.</li>
-          <li><strong>Adaptive behavior:</strong> uses wider crops when uncertain and tighter crops when confident.</li>
-        </ul>
-      </section>
-
-      <section id="approach" class="section">
-        <h2>Approach</h2>
-
-        <p>
-          GUI grounding is difficult because dense screenshots often contain many small, similar,
-          or closely placed elements. A wrong click can break the task flow of a computer-use agent.
-          DART addresses this by refining the prediction before execution, instead of relying on
-          expensive post-action reflection.
-        </p>
-
-        <h3>Core Idea</h3>
-        <p>
-          DART treats attention density as a confidence score. Concentrated attention usually means
-          the model is confident and close to the correct target. Dispersed attention suggests uncertainty,
-          so the method keeps more visual context and refines the prediction with a cropped view.
-        </p>
-
-        <h3>Key Components</h3>
-        <ul>
-          <li><strong>Confidence estimation:</strong> computes confidence from the density of the attention map.</li>
-          <li><strong>Adaptive cropping:</strong> uses large crops for uncertain predictions and smaller crops for confident ones.</li>
-          <li><strong>Early stopping:</strong> stops refinement when confidence is high enough.</li>
-          <li><strong>Coordinate mapping:</strong> maps refined local predictions back to the original screenshot.</li>
-          <li><strong>Model generalization:</strong> supports both attention-based and direct coordinate prediction models.</li>
-        </ul>
-
-        <h3>Evaluation</h3>
-        <ul>
-          <li><strong>Benchmarks:</strong> ScreenSpot-Pro, UI-Vision, and OSWorld-G.</li>
-          <li><strong>Models:</strong> GUI-Actor-7B, V2P-7B, Qwen3VL-8B, UI-Venus-1.5-8B, and KV-Ground-8B.</li>
-          <li><strong>Metric:</strong> grounding accuracy, based on whether the predicted point falls inside the target bounding box.</li>
-        </ul>
       </section>
 
       <section id="results" class="section">
         <h2>Results</h2>
-
-        <p>
-          DART consistently improved GUI grounding accuracy across different models and benchmarks,
-          with the strongest gains on dense, high-resolution interfaces.
-        </p>
-
-        <h3>Main Results</h3>
         <table>
-          <thead>
-            <tr>
-              <th>Dataset</th>
-              <th>Model</th>
-              <th>Baseline</th>
-              <th>DART</th>
-              <th>Gain</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ScreenSpot-Pro</td>
-              <td>GUI-Actor-7B</td>
-              <td>43.8%</td>
-              <td>60.5%</td>
-              <td>+16.7%</td>
-            </tr>
-            <tr>
-              <td>ScreenSpot-Pro</td>
-              <td>V2P-7B</td>
-              <td>49.5%</td>
-              <td>64.2%</td>
-              <td>+14.7%</td>
-            </tr>
-            <tr>
-              <td>ScreenSpot-Pro</td>
-              <td>KV-Ground-8B</td>
-              <td>73.0%</td>
-              <td>80.9%</td>
-              <td>+7.9%</td>
-            </tr>
-            <tr>
-              <td>UI-Vision</td>
-              <td>V2P-7B</td>
-              <td>23.9%</td>
-              <td>33.9%</td>
-              <td>+10.0%</td>
-            </tr>
-            <tr>
-              <td>OSWorld-G</td>
-              <td>GUI-Actor-7B</td>
-              <td>48.4%</td>
-              <td>61.4%</td>
-              <td>+13.0%</td>
-            </tr>
-            <tr>
-              <td>OSWorld-G</td>
-              <td>V2P-7B</td>
-              <td>52.0%</td>
-              <td>62.8%</td>
-              <td>+10.8%</td>
-            </tr>
-          </tbody>
+          <tr><th>Dataset</th><th>Model</th><th>Baseline</th><th>+ DART</th><th>Gain</th></tr>
+          <tr><td>ScreenSpot-Pro</td><td>GUI-Actor-7B</td><td>43.8%</td><td><strong>60.5%</strong></td><td><strong>+16.7%</strong></td></tr>
+          <tr><td>ScreenSpot-Pro</td><td>V2P-7B</td><td>49.5%</td><td><strong>64.2%</strong></td><td>+14.7%</td></tr>
+          <tr><td>ScreenSpot-Pro</td><td>KV-Ground-8B</td><td>73.0%</td><td><strong>80.9%</strong></td><td>+7.9%</td></tr>
+          <tr><td>UI-Vision</td><td>GUI-Actor-7B</td><td>21.6%</td><td><strong>31.0%</strong></td><td>+9.4%</td></tr>
+          <tr><td>OSWorld-G</td><td>GUI-Actor-7B</td><td>48.4%</td><td><strong>61.4%</strong></td><td>+13.0%</td></tr>
         </table>
-
-        <h3>Key Takeaways</h3>
         <ul>
-          <li>DART improved both attention-based and coordinate-prediction grounding models.</li>
-          <li>The largest gain was <strong>+16.7%</strong> on ScreenSpot-Pro with GUI-Actor-7B.</li>
-          <li>KV-Ground-8B with DART reached <strong>80.9%</strong> accuracy on ScreenSpot-Pro.</li>
-          <li>Adaptive refinement worked better than fixed-scale zooming and other refinement baselines.</li>
-          <li>The method improves accuracy without additional training or model architecture changes.</li>
+          <li><strong>5 models supported:</strong> KV-Ground-8B, Qwen3-VL-8B, UI-Venus-1.5-8B, GUI-Actor-7B, V2P-7B.</li>
+          <li><strong>3 benchmarks:</strong> ScreenSpot-Pro, UI-Vision, OSWorld-G.</li>
+          <li><strong>Training-free:</strong> No retraining, no architectural changes — works at inference time.</li>
+          <li><strong>Outperforms baselines:</strong> RegionFocus, MVP, and fixed-scale zooming across all model families.</li>
         </ul>
-
-        <h3>Limitations</h3>
-        <p>
-          DART still depends on the initial prediction. If the first prediction is far from the target,
-          refinement may crop the wrong region. It also adds extra inference cost, although early stopping
-          helps avoid unnecessary refinement.
-        </p>
       </section>
+
+    
     </article>
   </main>
 </body>

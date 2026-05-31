@@ -3,105 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Electricity Forecasting | Project Demo & Docs</title>
+  <title>Electricity Consumption Forecasting | Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
   <main class="page">
     <a class="back" href="../index.html#projects">← Back to portfolio</a>
-
     <article class="card">
       <h1>Electricity Consumption Forecasting</h1>
-      <p class="meta">CADS - FPT Corporation · 2023.05 - 2023.10</p>
-
+      <p class="meta">CADS - FPT Corporation · 2023.05 – 2023.10 · Client: CPC (Central Power Corporation)</p>
       <p>
-        Monthly electricity consumption forecasting project for 13 provinces in Vietnam using
-        decomposition-based time-series modeling.
+        Monthly electricity consumption forecasting for <strong>13 provinces</strong> in Central Vietnam using
+        <strong>STL decomposition</strong> into trend (linear model), seasonality (statistical model with per-month
+        parameters), and residual (ARIMA). Achieved <strong>MAPE < 6% across all 13 provinces</strong> and
+        <strong>< 4% in 6 of 13</strong>, directly supporting CPC's energy planning and grid management.
       </p>
 
       <div class="actions">
         <a class="btn primary" href="https://github.com/lexuanhoang120/Electricity-Consumption-Forecasting" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#docs">Go to Approach</a>
+        <a class="btn" href="#demo">Demo</a>
+        <a class="btn" href="#results">Results</a>
       </div>
 
       <section id="demo" class="section">
-        <h2>Demo</h2>
-        <p>
-          The demo illustrates the full forecasting pipeline with synthetic historical data (not real production data).
-          It supports both T+1 forecasting (next month) and recursive T+12 forecasting (next 12 months).
-        </p>
-        <p>
-          Run command: <code>python3 demo_prediction.py</code>
-        </p>
-        <ul>
-          <li>Forecast components: <code>trend</code>, <code>season</code>, <code>resid</code>, and final <code>y_pr</code>.</li>
-          <li>Generated file: <code>docs/demo_forecast_next_month.csv</code> (T+1 forecast).</li>
-          <li>Generated file: <code>docs/demo_forecast_12_months.csv</code> (recursive T+12 forecast).</li>
-          <li>Generated plots: <code>docs/forecast_sample.png</code> and per-province <code>docs/forecast_&lt;province&gt;.png</code>.</li>
-          <li>Detailed BDINH visuals: total and component forecast plots for clearer error inspection.</li>
-        </ul>
-
-        <div class="demo-evidence">
-          <article class="evidence-card">
-            <h3>Demo Overview Plot</h3>
-            <img
-              src="https://raw.githubusercontent.com/lexuanhoang120/Electricity-Consumption-Forecasting/main/docs/forecast_sample.png"
-              alt="Forecast sample plot showing history and predicted values across provinces"
-            />
+        <h2>Forecast Visualization</h2>
+        <div class="demo-gallery">
+          <figure>
+            <img src="https://raw.githubusercontent.com/lexuanhoang120/Electricity-Consumption-Forecasting/main/docs/forecast_sample.png" alt="Forecast sample" loading="lazy" />
+            <figcaption>Combined sample plot — history + predicted values for example provinces.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://raw.githubusercontent.com/lexuanhoang120/Electricity-Consumption-Forecasting/main/docs/forecast_BDINH_total.png" alt="BDINH total forecast" loading="lazy" />
+            <figcaption>BDINH province — total forecast vs. historical consumption.</figcaption>
+          </figure>
+        </div>
+        <figure>
+          <img src="https://raw.githubusercontent.com/lexuanhoang120/Electricity-Consumption-Forecasting/main/docs/forecast_BDINH_components_three_plots.png" alt="BDINH component forecasts" loading="lazy" style="max-width:100%;" />
+          <figcaption>BDINH decomposition: trend, seasonal, and residual components forecast separately, then combined.</figcaption>
+        </figure>
+      </section>
 
       <section id="results" class="section">
-        <h2>Results</h2>
-        <ul>
-          <li>Validated the project pipeline with implementation-level tests and example scenarios.</li>
-          <li>Documented key outputs, observed behavior, and practical limitations for deployment or research reuse.</li>
-        </ul>
-      </section>
-          </article>
-
-          <article class="evidence-card">
-            <h3>BDINH Component Decomposition</h3>
-            <img
-              src="https://raw.githubusercontent.com/lexuanhoang120/Electricity-Consumption-Forecasting/main/docs/forecast_BDINH_components_three_plots.png"
-              alt="BDINH trend, seasonal, and residual forecast component plots"
-            />
-          </article>
-        </div>
+        <h2>Results — Jan 2022 – Jul 2023 (18 months)</h2>
+        <table>
+          <tr><th>Metric</th><th>Result</th></tr>
+          <tr><td>All 13 provinces</td><td>Average MAPE <strong>< 6%</strong></td></tr>
+          <tr><td>6 of 13 provinces</td><td>Average MAPE <strong>< 4%</strong></td></tr>
+          <tr><td>3 near-threshold provinces</td><td>DANANG (5.8%), DNONG (5.4%), QNGAI (5.5%)</td></tr>
+          <tr><td>Known challenge</td><td>Jan 2023 over-forecast across all provinces (Tet holiday shift)</td></tr>
+          <tr><td>Most volatile</td><td>DNONG — highest error variance</td></tr>
+          <tr><td>T+12 error gradient</td><td>~6% (T+1) → ~14% (T+12)</td></tr>
+        </table>
       </section>
 
-      <section id="docs" class="section">
+      <section id="approach" class="section">
         <h2>Approach</h2>
-        <p>
-          The forecasting method decomposes each province series and predicts each component separately:
-        </p>
         <ul>
-          <li><strong>Trend:</strong> linear model for long-term movement.</li>
-          <li><strong>Seasonality:</strong> statistical model with parameter controls (<code>lag</code>, <code>order1</code>, <code>order2</code>, <code>shift</code>).</li>
-          <li><strong>Residual:</strong> ARIMA model for remaining short-term variation.</li>
-          <li><strong>Final prediction:</strong> trend + seasonal + residual.</li>
+          <li><strong>Decomposition:</strong> Each province's monthly series → STL decomposition → trend + seasonal + residual.</li>
+          <li><strong>Trend:</strong> Linear model — simple, robust, avoids overfitting to short-term noise.</li>
+          <li><strong>Seasonality:</strong> Statistical model with per-month parameters (lag, order1, order2, shift). Each of the 12 calendar months has independently optimized parameters selected by grid search on training MAPE (2014–2021).</li>
+          <li><strong>Key insight:</strong> Cumulative consumption patterns are highly correlated across years (correlation ≈ 1) — cumulative forecasting provides a reliable anchor.</li>
+          <li><strong>Residual:</strong> ARIMA — captures short-term patterns unexplained by trend or seasonality.</li>
+          <li><strong>T+12:</strong> Recursive strategy — predict T+1, feed into input, predict T+2, ... predict T+12. Four strategies evaluated (Recursive, Multi-output, Direct, DirRec).</li>
+          <li><strong>Sub-series analysis:</strong> Also evaluated breakdown by industry sector (5 sectors) and district (DVDC_LV3) — residential best at 2.5–8.9% MAPE, agriculture worst at 15–20%.</li>
         </ul>
-
-        <p>
-          Main scripts and assets from the project README:
-        </p>
-        <ul>
-          <li><code>main/forecast_t1_13pr_sum.py</code> for T+1 forecasting.</li>
-          <li><code>main/forecast_t12_13pr_sum.py</code> for recursive T+12 forecasting.</li>
-          <li><code>main/helper.py</code> for support functions.</li>
-          <li><code>jupyter-notebook/CPC_Forecast.ipynb</code> for notebook walkthrough.</li>
-        </ul>
-
-        <p>
-          Reported development-time results: MAPE below 6% across all 13 provinces, and below 4% for 6 provinces
-          (evaluation period: January 2022 to July 2023).
-        </p>
-      </section>
-
-      <section class="section">
-        <h2>Privacy Note</h2>
-        <p>
-          This repository version was revised from internal company project code (2023). Confidential paths,
-          private infrastructure details, and sensitive business information were removed.
-        </p>
       </section>
     </article>
   </main>

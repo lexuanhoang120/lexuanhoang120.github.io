@@ -3,39 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Log Web Analysis | Project Docs</title>
+  <title>Web Behavior Analytics | Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
   <main class="page">
     <a class="back" href="../index.html#projects">← Back to portfolio</a>
     <article class="card">
-      <h1>Log Web Analysis</h1>
+      <h1>Web Behavior Analytics — FPT Shop</h1>
       <p class="meta">CADS - FPT Corporation · 2024.04</p>
       <p>
-        Web log analysis project for customer behavior modeling, path analysis, and interaction insights to support
-        business decision-making.
+        End-to-end clickstream analytics for <strong>fptshop.com.vn</strong> — one of Vietnam's largest e-commerce platforms.
+        Processed <strong>96M+ raw logs</strong> into <strong>32.5M user sessions</strong> across <strong>20 labeled actions</strong>,
+        built a 5-phase customer journey model, segmented users into 3 behavioral groups, and predicted exit intent with
+        <strong>62.9% precision</strong> (+27.7 pp over baseline).
       </p>
 
       <div class="actions">
         <a class="btn primary" href="https://github.com/lexuanhoang120/log-web-fshop" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#docs">Go to Approach</a>
+        <a class="btn" href="#results">Results</a>
+        <a class="btn" href="#approach">Approach</a>
       </div>
 
-      <section id="docs" class="section">
-        <h2>Approach</h2>
-        <ul>
-          <li>Web-log ingestion and normalization pipeline.</li>
-          <li>Session/user-level feature construction.</li>
-          <li>Behavior flow and sequence analysis outputs.</li>
-        </ul>
+      <section id="demo" class="section">
+        <h2>Pipeline Overview</h2>
+        <div class="demo-gallery">
+          <figure>
+            <img src="https://raw.githubusercontent.com/lexuanhoang120/log-web-fshop/main/docs/methodology.png" alt="Methodology diagram" loading="lazy" />
+            <figcaption>Overall methodology — from raw logs to business recommendations.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://raw.githubusercontent.com/lexuanhoang120/log-web-fshop/main/docs/journey.png" alt="Customer journey mapping" loading="lazy" />
+            <figcaption>5-phase customer journey: Awareness → Consideration → Decision → Consumption → Loyalty.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://raw.githubusercontent.com/lexuanhoang120/log-web-fshop/main/docs/top-15-group-action.png" alt="Top 15 group actions" loading="lazy" />
+            <figcaption>Top actions by traffic share — viewProduct (32%), findProduct (20%), viewDetail (14%).</figcaption>
+          </figure>
+        </div>
       </section>
 
       <section id="results" class="section">
-        <!-- <h2>Results</h2> -->
+        <h2>Key Results</h2>
+        <table>
+          <tr><th>Metric</th><th>Value</th></tr>
+          <tr><td>Raw logs processed</td><td><strong>96M+</strong> (Aug–Oct 2023)</td></tr>
+          <tr><td>Valid labeled logs</td><td><strong>93M</strong></td></tr>
+          <tr><td>Valid sessions</td><td><strong>32.5M</strong></td></tr>
+          <tr><td>Labeled actions</td><td><strong>20</strong></td></tr>
+          <tr><td>Purchase session rate</td><td><strong>2.8%</strong></td></tr>
+          <tr><td>Behavioral segments</td><td>Info Seekers (25%), Product Explorers (70%), Shoppers (4%)</td></tr>
+          <tr><td>Exit-intent precision</td><td><strong>62.9%</strong> (+27.7 pp over random baseline)</td></tr>
+          <tr><td>Exit-intent F1 (session-level)</td><td><strong>66.9%</strong></td></tr>
+        </table>
+      </section>
+
+      <section id="approach" class="section">
+        <h2>Approach</h2>
         <ul>
-          <!-- <li>Validated the project pipeline with implementation-level tests and example scenarios.</li>
-          <li>Documented key outputs, observed behavior, and practical limitations for deployment or research reuse.</li> -->
+          <li><strong>Market research</strong> — Reviewed academic papers and industry case studies on clickstream analytics, in-session marketing, purchase intent, and exit-intent prediction.</li>
+          <li><strong>Data cleaning</strong> — Removed duplicates, invalid logs, null actions (~600K). Reconstructed sessions by 30-min inactivity threshold.</li>
+          <li><strong>Action labeling</strong> — Rule-based framework mapping raw URLs/events to 20 structured actions (viewProduct, findProduct, addToCart, purchase, etc.).</li>
+          <li><strong>Journey mapping</strong> — <code>log → action → phase → session</code> pipeline. 5 phases: Awareness, Consideration (77.2% of traffic), Decision (2.6%), Consumption, Loyalty.</li>
+          <li><strong>Behavioral segmentation</strong> — 3 segments based on session depth, product views, and purchase signals.</li>
+          <li><strong>Exit-intent prediction</strong> — Rule-based pattern matching from 32.2M training sessions, evaluated on 325K test sessions at step-level and session-level.</li>
+        </ul>
+      </section>
+
+      <section id="insights" class="section">
+        <h2>Business Insights</h2>
+        <ul>
+          <li><strong>Peak traffic:</strong> 9–11, 14–16, 19–21 (54% of all traffic).</li>
+          <li><strong>Session duration:</strong> >90% under 5 minutes — intervention window is tight.</li>
+          <li><strong>Product interest:</strong> Smartphones 58%, Laptops 24%.</li>
+          <li><strong>Entry source:</strong> Google search ~50%, Direct ~20%.</li>
+          <li><strong>Purchase timing:</strong> Most between 2nd–5th action — early signals matter.</li>
+          <li><strong>High-intent journeys:</strong> Sessions with 6+ phases have 58.33% purchase rate.</li>
         </ul>
       </section>
     </article>

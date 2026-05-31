@@ -8,10 +8,14 @@ const portfolioData = {
   ],
   hero: {
     eyebrow: "AI Researcher · Data Scientist",
-    heading: "Bringing AI automation into real-world systems.",
+    heading: "I build AI systems that work in the real world.",
     description:
-      "Data scientist and AI researcher with a background in Mechatronics Engineering and experience in vision–language models, computer vision, time-series forecasting, and business analytics.",
-    highlights: [],
+      "M.S. candidate in AI & Robotics at Sejong University, researching vision–language models and GUI grounding at the VLI Lab. Previously built forecasting, computer vision, and analytics systems at FPT and VTCODE that process 96M+ records, serve 450+ restaurants, and classify with 96% accuracy.",
+    highlights: [
+      { value: "95.9%", label: "Chicken classification accuracy" },
+      { value: "80.9%", label: "ScreenSpot-Pro grounding (Top-1)" },
+      { value: "< 6% MAPE", label: "Electricity forecasting (13 provinces)" }
+    ],
     actions: [
       { label: "Email Me", href: "mailto:lexuanhoang120@gmail.com", primary: true },
       { label: "Curriculum Vitae (CV)", href: "docs/HOANG_CV.pdf", external: true },
@@ -22,27 +26,27 @@ const portfolioData = {
   },
   profile: [
     { label: "Location", value: "Seoul, South Korea" },
-    { label: "Current role", value: "Research Assistant, Vision Language Intelligence Lab" },
-    { label: "Research Interests", value: "GUI grounding, computer-use agents, practical AI deployment" },
+    { label: "Current role", value: "M.S. Candidate & Research Assistant, VLI Lab, Sejong University" },
+    { label: "Research", value: "Vision–Language Models, GUI Grounding, Computer-Use Agents" },
+    { label: "GPA", value: "4.29 / 4.5 (M.S.) · 8.13 / 10 (B.E.)" },
     { label: "Availability", value: "Open to full-time roles from July 2026" },
-    { label: "Visa", value: "D2" },
-    { label: "Nationality", value: "Vietnamese" }
+    { label: "Languages", value: "Vietnamese (Native) · English (Advanced) · Korean (Basic)" }
   ],
   about: {
     subtitle:
-      "I care about measurable outcomes: not only model quality, but also reliability, deployment fit, and business value.",
+      "I bridge research and engineering. I've published first-author papers on GUI grounding, built forecasting systems serving 450+ restaurants and 13 provinces, deployed face recognition in production, and designed a complete mechatronic system from scratch. I care about building things that actually work.",
     cards: [
       {
-        title: "Research Mindset",
-        description: "I prototype quickly, validate assumptions, and write clearly so research can be reused by teams."
+        title: "Research",
+        description: "First-author publications on training-free GUI grounding. Prototype fast, validate rigorously, write for reproducibility."
       },
       {
-        title: "Engineering Execution",
-        description: "I build full pipelines: data preparation, modeling, evaluation, and handoff-ready implementation."
+        title: "Engineering",
+        description: "Full pipelines from data to deployment: preprocessing, modeling, evaluation, API serving, and monitoring."
       },
       {
-        title: "Business Relevance",
-        description: "I translate model performance into metrics stakeholders care about, such as error reduction and decision support."
+        title: "Impact",
+        description: "90% feature reduction. 13% WAPE improvement. 19% better than client baseline. I measure what matters."
       }
     ]
   },
@@ -68,8 +72,8 @@ const portfolioData = {
         title: "DART: Density-Aware Adaptive Refinement Technique for GUI Grounding in Computer-Use Agents",
         period: "2026.05",
         sortKey: 202605,
-        description: "Density-aware adaptive refinement method to improve GUI grounding precision for computer-use agents.",
-        metric: "First Author · Submitted to IEEE Access",
+        description: "Training-free adaptive refinement for GUI grounding. Leverages attention maps from intermediate VLM layers to guide when to stop and how to crop, improving ScreenSpot-Pro accuracy from 73.0% to 80.9% — achieving top-1 leaderboard performance competitive with much larger models.",
+        metric: "First Author · Under Review at IEEE Access · Top-1 ScreenSpot-Pro",
         tags: ["Academic", "Under Review", "First Author", "IEEE Access"],
         location: { label: "Sejong University VLI Lab", href: "#exp-vli-lab" },
         links: [
@@ -111,7 +115,8 @@ const portfolioData = {
         period: "2025.12 - 2026.02",
         sortKey: 202512,
         description:
-          "Built a CCTV retrieval filtering module with frame sampling and prompt-based inference to separate CCTV from non-CCTV footage as a laboratory-assigned internship task with PIA Space.",
+          "VLM-based CCTV classification using frame sampling and prompt inference on Qwen3-VL and InternVL3. Achieved 94.44% accuracy on test set and 83.53% on a larger 425-video CCTV-only dataset through optimized prompt engineering with surveillance-specific terminology.",
+        metric: "94.44% accuracy",
         tags: ["Industry", "VLM", "Video Understanding", "Prompt Engineering"],
         location: { label: "PIA Space (Lab Internship Task)", href: "https://www.pia.space/", external: true },
         links: [
@@ -125,8 +130,9 @@ const portfolioData = {
         period: "2025.11",
         sortKey: 202511,
         description:
-          "Vision-based communication project for reliable visual information transfer in constrained environments.",
-        tags: ["Academic", "Computer Vision", "Communication Systems"],
+          "Vision-guided beamforming pipeline using YOLOv11 for vehicle detection and ByteTrack for tracking, predicting future positions to overcome perception-to-actuation latency. Evaluated on DeepSense 6G across 3 driving scenarios, improving average data rate by 20–29% over baseline.",
+        metric: "+20–29% data rate improvement · DeepSense 6G",
+        tags: ["Academic", "Computer Vision", "Object Tracking"],
         location: { label: "Sejong University VLI Lab", href: "#exp-vli-lab" },
         links: [
           { label: "GitHub", href: "https://github.com/lexuanhoang120/Vision-based-Communication", external: true },
@@ -139,9 +145,9 @@ const portfolioData = {
         period: "2024.04",
         sortKey: 202404,
         description:
-          "Web-log analytics project for user behavior and sequence pattern analysis.",
-        tags: ["Industry", "Web Analytics", "Behavior Modeling"],
-        metric: "10M+ raw log records analyzed",
+          "Processed 96M+ raw web logs into 20 labeled user actions across 32.5M sessions, mapped 5-phase customer journeys, segmented users into 3 behavioral groups, and predicted exit intent with 62.9% precision (+27.7 pp over baseline).",
+        metric: "96M+ logs · 32.5M sessions · 62.9% exit precision",
+        tags: ["Industry", "Web Analytics", "Behavior Modeling", "Customer Journey"],
         location: { label: "CADS - FPT Corporation", href: "#exp-fpt-cads" },
         links: [
           { label: "GitHub", href: "https://github.com/lexuanhoang120/log-web-fshop", external: true },
@@ -154,7 +160,8 @@ const portfolioData = {
         period: "2024.03",
         sortKey: 202403,
         description:
-          "Data collection and enrichment utility to map profile/company information with contact datasets.",
+          "Privacy-aware email-to-LinkedIn enrichment pipeline. Processed 50K emails through authorized profile lookup, matching 4,070 LinkedIn accounts (8.1% rate) including 2,041 profiles with work-experience data and 1,560 with education data.",
+        metric: "50K emails · 4,070 matched · 8.1% match rate",
         tags: ["Industry", "Data Pipeline", "Web Scraping"],
         location: { label: "CADS - FPT Corporation", href: "#exp-fpt-cads" },
         links: [
@@ -170,7 +177,7 @@ const portfolioData = {
         description:
           "Built a location-data crawling pipeline from Google Maps sources for business profiling and downstream analytics.",
         metric: "709K+ rows crawled, 183K+ unique phone numbers extracted",
-          tags: ["Industry", "Web Scraping", "Data Pipeline", "Geo Data"],
+          tags: ["Industry", "Web Scraping", "Data Pipeline"],
         location: { label: "CADS - FPT Corporation", href: "#exp-fpt-cads" },
         links: [
           { label: "GitHub", href: "https://github.com/lexuanhoang120/Google-Maps-Business-Scraper", external: true },
@@ -183,8 +190,8 @@ const portfolioData = {
         period: "2024.01 - 2024.05",
         sortKey: 202401,
         description:
-          "Improved demand prediction for 600 restaurants through data cleaning, feature design, and model strategy updates.",
-        metric: "15% relative WAPE reduction",
+          "Daily guest-count forecasting for 440+ Golden Gate restaurants using XGBoost with restaurant clustering into Global/Local model groups. Reduced features by ~90%, training time by ~70%, and lowered WAPE from 25.3% to 22.0% — a 13% improvement over the previous model.",
+        metric: "WAPE 25.3% → 22.0% · 450+ restaurants · 90% fewer features",
         tags: ["Industry", "Forecasting", "Feature Engineering", "Business Analytics"],
         location: { label: "CADS - FPT Corporation", href: "#exp-fpt-cads" },
         links: [
@@ -198,8 +205,9 @@ const portfolioData = {
         period: "2022.06 - 2022.10",
         sortKey: 202206,
         description:
-          "Revenue forecasting workflow for business planning and operational decision support.",
-        tags: ["Industry", "Forecasting", "Business Analytics"],
+          "Daily revenue forecasting for 17 ICOOL restaurant locations using Facebook Prophet with logistic growth, custom seasonality, lunar calendar features, and per-store cap/floor constraints. Projected ~360 tỷ VND total revenue across the 10-month forecast period.",
+        metric: "17 stores · 10-month horizon · Prophet with custom regressors",
+        tags: ["Industry", "Forecasting", "Business Analytics", "Prophet"],
         location: { label: "VTCODE Company", href: "#exp-vtcode" },
         links: [
           { label: "GitHub", href: "https://github.com/lexuanhoang120/Revenue_Prediction", external: true },
@@ -212,8 +220,8 @@ const portfolioData = {
         period: "2023.05 - 2023.10",
         sortKey: 202305,
         description:
-          "Designed monthly forecasting across 13 provinces using decomposition and statistical time-series modeling.",
-        metric: "MAPE below 6% in all provinces, below 4% in six provinces",
+          "Monthly electricity forecasting for 13 Vietnamese provinces using STL decomposition into trend (linear), seasonal (statistical), and residual (ARIMA) components. Achieved MAPE < 6% across all provinces and < 4% in six, directly supporting energy planning for CPC.",
+        metric: "< 6% MAPE all provinces · < 4% MAPE in 6/13 · 18-month validation",
         tags: ["Industry", "Time Series", "ARIMA", "Forecasting"],
         location: { label: "CADS - FPT Corporation", href: "#exp-fpt-cads" },
         links: [
@@ -227,8 +235,9 @@ const portfolioData = {
         period: "2022.08",
         sortKey: 202208,
         description:
-          "Crawler project for collecting and categorizing structured lyric metadata.",
-        tags: ["Industry", "Web Scraping", "Data Processing"],
+          "Selenium-based web scraper collecting song lyrics and genre metadata from ZingMP3 and NhacCuaTui. Crawled ~19K songs across batched runs using right-click context menu navigation to access hidden song info panels, with 779K successful extractions.",
+        metric: "~19K songs · 779K extractions · ZingMP3 + NhacCuaTui",
+        tags: ["Industry", "Web Scraping", "Selenium", "Data Processing"],
         location: { label: "VTCODE Company", href: "#exp-vtcode" },
         links: [
           { label: "GitHub", href: "https://github.com/lexuanhoang120/Crawl_Lyrics_Category", external: true },
@@ -241,8 +250,9 @@ const portfolioData = {
         period: "2022.10",
         sortKey: 202210,
         description:
-          "Web-based face recognition application prototype integrating browser-facing workflows with model inference.",
-        tags: ["Industry", "Face Recognition", "Web App"],
+          "Full-stack face recognition management platform — React frontend + FastAPI backend + MongoDB. Built REST APIs for CRUD face lists, MTCNN face detection, VGGFace2 embedding, and real-time recognition dashboard. Embedding computation offloaded to async background tasks.",
+        metric: "FastAPI · MongoDB · MTCNN · VGGFace2",
+        tags: ["Industry", "Face Recognition", "FastAPI"],
         location: { label: "VTCODE Company", href: "#exp-vtcode" },
         links: [
           { label: "GitHub", href: "https://github.com/lexuanhoang120/Web_Face_Recognition", external: true },
@@ -255,8 +265,8 @@ const portfolioData = {
         period: "2022.06 - 2023.03",
         sortKey: 202206,
         description:
-          "Delivered a camera-based attendance automation system using facial embeddings and identity matching.",
-        metric: "97% recognition accuracy",
+          "Real-time face recognition attendance system using SSD detection, centroid tracking, and VGGFace2/ResNet50 embeddings with cosine similarity. Automated check-in/checkout with Vietnamese TTS voice greeting via RTSP camera, logging to SQLite.",
+        metric: "~97% recognition accuracy · Real-time · VGGFace2",
         tags: ["Industry", "Face Recognition", "Computer Vision", "Deployment"],
         location: { label: "VTCODE Company", href: "#exp-vtcode" },
         links: [
@@ -270,8 +280,9 @@ const portfolioData = {
         period: "2021.01 - 2022.06",
         sortKey: 202101,
         description:
-          "Developed an end-to-end mechatronic classification system from image collection to model integration and control design.",
-        tags: ["Academic", "YOLOv5", "Automation", "Mechatronics"],
+          "End-to-end automated chicken gender sorting system: self-collected dataset, custom CNN classifier (4 conv + 2 dense), multi-frame majority voting (95.9% accuracy), plus mechanical singulation design and ATMega 2560 control.",
+        metric: "95.9% accuracy · CNN · Full mechatronic system · Kaggle",
+        tags: ["Academic", "CNN", "Automation", "Mechatronics"],
         location: { label: "HCMUT Control and Automation Lab", href: "#exp-hcmut-calab" },
         links: [
           { label: "GitHub", href: "https://github.com/lexuanhoang120/Thesis-Design-a-system-classifying-chicken-gender", external: true },
@@ -289,12 +300,13 @@ const portfolioData = {
       organizationLink: "https://sites.google.com/view/vlilab",
       location: "Seoul, South Korea",
       summary:
-        "Researching training-free GUI grounding methods, vision-based systems, and VLM modules while contributing to end-to-end research delivery.",
+        "First-author research on training-free GUI grounding methods. Building datasets and models for computer-use agents.",
       highlights: [
-        "Researched training-free methods to improve GUI grounding and proposed confidence-guided adaptive refinement that leverages spatial signals from attention maps for stopping and cropping.",
-        "Implemented a VLM-based video filtering module within a CCTV retrieval system, using frame sampling and prompt-based inference to classify videos as CCTV or non-CCTV footage.",
-        "Developed a vision-based system for data transmission from roadside stations to moving vehicles.",
-        "Contributed to research activities, data annotation, simulation, and manuscript preparation."
+        "Proposed DART — a training-free adaptive refinement method for GUI grounding. Improved ScreenSpot-Pro accuracy from 73.0% to 80.9% (Top-1 leaderboard), competitive with much larger models. First author, under review at IEEE Access.",
+        "Building a dataset for computer-use agents (first author, targeting AAAI 2027).",
+        "Contributed to Training-Free ROI Selection via Semantic Vector Fields (second author, under review at ECCV 2026).",
+        "Implemented VLM-based CCTV filtering with Qwen3-VL and InternVL3, achieving 94.44% accuracy through optimized prompt engineering.",
+        "Developed vision-guided beamforming pipeline, improving data rate by 20–29% on DeepSense 6G."
       ],
       relatedLinks: [
         { label: "Project: CCTV Video Filtering", href: "#project-cctv-video-filtering" },
@@ -311,12 +323,12 @@ const portfolioData = {
       organizationLink: "https://fpt.com/en/",
       location: "Vietnam",
       summary:
-        "Led forecasting, customer analytics, and data-enrichment initiatives at CADS-FPT across time-series, behavior modeling, and external data pipelines.",
+        "Delivered forecasting, analytics, and data-enrichment projects across time-series, behavior modeling, and external data — serving clients including CPC (electricity) and Golden Gate (restaurants).",
       highlights: [
-        "Built monthly electricity-consumption forecasting models for 13 Vietnamese provinces using trend, seasonal, and residual decomposition with linear, statistical, and ARIMA-based methods, achieving MAPE below 6% across all provinces and below 4% in six provinces.",
-        "Improved a daily customer-traffic forecasting model for 600 restaurants by enhancing preprocessing, feature engineering, and modeling strategies, achieving a 15% relative reduction in WAPE.",
-        "Analyzed large-scale raw web-log data to develop anonymous customer personas, model user journeys, and predict user touchpoints using Markov sequence analysis.",
-        "Automated web scraping pipelines to collect and enrich external data from LinkedIn, Google Maps, and Chotot, supporting exploratory analysis and business recommendations."
+        "Designed electricity-demand forecasting for 13 provinces using STL decomposition + linear/statistical/ARIMA models. Achieved MAPE < 6% (all provinces) and < 4% (6/13), directly supporting CPC energy planning.",
+        "Improved daily guest-count forecasting for 440+ Golden Gate restaurants. Reduced features by ~90% and training time by ~70%. Lowered WAPE from 25.3% to 22.0% — a 13% improvement over previous model.",
+        "Processed 96M+ FPT Shop web logs into 20 labeled actions across 32.5M sessions. Mapped 5-phase customer journeys and 3 behavioral segments. Predicted exit intent with 62.9% precision (+27.7 pp over baseline).",
+        "Automated web scraping across LinkedIn, Google Maps, and Chotot — extracted 1M+ records and 200K+ unique contacts for customer analytics."
       ],
       relatedLinks: [
         { label: "Project: Electricity Forecasting", href: "#project-electricity-consumption-forecasting" },
@@ -334,11 +346,11 @@ const portfolioData = {
       organizationLink: "https://www.vtcode.vn/",
       location: "Vietnam",
       summary:
-        "Deployed face-recognition attendance solutions and built revenue forecasting workflows for F&B operations.",
+        "Built and deployed computer vision and forecasting systems for enterprise clients in F&B and data services.",
       highlights: [
-        "Deployed camera-based face-recognition attendance with around 97% accuracy.",
-        "Built branch-level forecasting workflows for F&B revenue planning.",
-        "Processed and integrated multi-source enterprise datasets."
+        "Built and deployed real-time face-recognition attendance system (SSD + VGGFace2 + centroid tracking, ~97% accuracy). Extended to full-stack web platform with FastAPI + MongoDB + React.",
+        "Built daily revenue forecasting for a 17-restaurant chain using Facebook Prophet with custom seasonality, lunar calendar features, and per-store logistic growth constraints.",
+        "Built ETL pipelines integrating multi-source company data with external web-scraped data for board-level analytics."
       ],
       relatedLinks: [
         { label: "Project: Face Attendance System", href: "#project-face-recognition-attendance-system" },
@@ -425,7 +437,6 @@ const portfolioData = {
         department: "Department of Artificial Intelligence and Robotics",
         organization: "Sejong University",
         location: "Seoul, Korea",
-        phone: "+82 10 6248 7972",
         email: "cjeong72@gmail.com"
       },
       {
@@ -434,7 +445,6 @@ const portfolioData = {
         department: "Department of Mechanical Engineering",
         organization: "Ho Chi Minh University of Technology",
         location: "VNUHCM, Vietnam",
-        phone: "+84 903 686 334",
         email: "pcbang@hcmut.edu.vn"
       },
       {
@@ -442,8 +452,7 @@ const portfolioData = {
         title: "CEO - Director",
         department: "VTCODE Technology and Science Applications Limited Company",
         organization: "VTCODE",
-        location: "Binh Thanh District, Ho Chi Minh City, Vietnam",
-        phone: "+84 986 198 731"
+        location: "Binh Thanh District, Ho Chi Minh City, Vietnam"
       }
     ]
   },

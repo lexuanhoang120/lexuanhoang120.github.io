@@ -3,194 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Map LinkedIn Email | Project Docs</title>
+  <title>LinkedIn Email Enrichment | Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
   <main class="page">
     <a class="back" href="../index.html#projects">← Back to portfolio</a>
-
     <article class="card">
-      <h1>Map LinkedIn Email</h1>
+      <h1>LinkedIn Email Enrichment</h1>
       <p class="meta">CADS - FPT Corporation · 2024.03</p>
-
       <p>
-        Privacy-aware workflow to enrich email-based customer records with LinkedIn profile information.
-        The pipeline checks whether each email can be matched, then normalizes profile, work-experience,
-        and education data for downstream analytics.
+        Privacy-aware pipeline that maps email records to LinkedIn professional profiles using authorized
+        session-based lookup. Processed <strong>50,000 emails</strong>, matched <strong>4,070 LinkedIn accounts</strong>
+        (8.1% match rate), and enriched with structured work-experience and education data.
       </p>
 
       <div class="actions">
         <a class="btn primary" href="https://github.com/lexuanhoang120/map-linkedin-email" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#docs">Go to Approach</a>
+        <a class="btn" href="#demo">Demo</a>
+        <a class="btn" href="#results">Results</a>
       </div>
 
       <section id="demo" class="section">
         <h2>Demo</h2>
-        <p>
-          Demo flow: email sample → authorized profile lookup → classify match result → parse profile response →
-          normalize profile/work/education data → aggregate and evaluate data quality.
-        </p>
-
-        <div class="demo-evidence">
-          <article class="evidence-card">
-            <h3>Email No Match</h3>
-            <img
-              src="https://raw.githubusercontent.com/lexuanhoang120/map-linkedin-email/main/docs/no%20match.png"
-              alt="Example of email no-match result"
-            />
-          </article>
-
-          <article class="evidence-card">
-            <h3>Email Match</h3>
-            <img
-              src="https://raw.githubusercontent.com/lexuanhoang120/map-linkedin-email/main/docs/demo1.png"
-              alt="Example of email successfully matched to LinkedIn profile"
-            />
-          </article>
+        <div class="demo-gallery">
+          <figure>
+            <img src="https://raw.githubusercontent.com/lexuanhoang120/map-linkedin-email/main/docs/no%20match.png" alt="No match result" loading="lazy" />
+            <figcaption>Email with no LinkedIn match.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://raw.githubusercontent.com/lexuanhoang120/map-linkedin-email/main/docs/demo1.png" alt="Match found" loading="lazy" />
+            <figcaption>Email matched to a LinkedIn profile with professional data.</figcaption>
+          </figure>
         </div>
-
-        <ul>
-          <li>Input sample size: 50,000 emails.</li>
-          <li>Matched to LinkedIn accounts: 4,070 (8.1%).</li>
-          <li>Profiles with work-experience data: 2,041 (4.1%).</li>
-          <li>Profiles with education data: 1,560 (3.1%).</li>
-        </ul>
       </section>
 
-      <section id="docs" class="section">
-        <h2>Approach</h2>
-        <ul>
-          <li>Main scripts: <code>1_get_token_from_outlook.py</code> and <code>2_email_in_linkedin.py</code>.</li>
-          <li>Lookup outcomes are classified into matched profile, partial match, no match, and failed lookup.</li>
-          <li>Matched responses are parsed into structured profile, work-experience, and education tables.</li>
-          <li>Expected outputs: <code>access_token.json</code> and <code>email_match_linkedin.json</code>.</li>
-          <li>Local resources include <code>resource/email.xlsx</code>, <code>resource/account.txt</code>, and optional <code>resource/chromedriver</code>.</li>
-        </ul>
+      <section id="results" class="section">
+        <h2>Results — 50,000 Email Sample</h2>
+        <table>
+          <tr><th>Stage</th><th>Count</th><th>Rate</th></tr>
+          <tr><td>Emails processed</td><td>50,000</td><td>100%</td></tr>
+          <tr><td>Matched to LinkedIn</td><td><strong>4,070</strong></td><td>8.1%</td></tr>
+          <tr><td>With work-experience data</td><td><strong>2,041</strong></td><td>4.1%</td></tr>
+          <tr><td>With education data</td><td><strong>1,560</strong></td><td>3.1%</td></tr>
+        </table>
+        <p><strong>Top job titles:</strong> Student, Manager, Teacher, Project Manager, Engineer, Software Engineer.</p>
+        <p><strong>Top education fields:</strong> Business Administration, Information Technology, Computer Science, Marketing, Accounting.</p>
       </section>
 
-      <section class="section">
-        <h2>Results</h2>
-        <p>From 50,000 email records:</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Stage</th>
-              <th>Count</th>
-              <th>Rate</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Emails checked</td>
-              <td>50,000</td>
-              <td>100%</td>
-            </tr>
-            <tr>
-              <td>Emails matched to LinkedIn accounts</td>
-              <td>4,070</td>
-              <td>8.1%</td>
-            </tr>
-            <tr>
-              <td>Profiles with work-experience data</td>
-              <td>2,041</td>
-              <td>4.1%</td>
-            </tr>
-            <tr>
-              <td>Profiles with education data</td>
-              <td>1,560</td>
-              <td>3.1%</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>Work Experience Insights</h3>
-        <p>Most profiles with work-experience data had one listed experience.</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Number of Experiences</th>
-              <th>Profile Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td>1,306</td></tr>
-            <tr><td>2</td><td>205</td></tr>
-            <tr><td>3</td><td>161</td></tr>
-            <tr><td>4</td><td>114</td></tr>
-            <tr><td>5</td><td>101</td></tr>
-          </tbody>
-        </table>
-
-        <p>Top latest job titles included:</p>
-        <ul>
-          <li>Student</li>
-          <li>Manager</li>
-          <li>Teacher</li>
-          <li>Project Manager</li>
-          <li>Engineer</li>
-          <li>Software Engineer</li>
-          <li>Accountant</li>
-          <li>Director</li>
-          <li>Developer</li>
-          <li>Architect</li>
-        </ul>
-        <p>
-          Work start year was partially available, while work end year was often missing, likely because many profiles
-          list current or incomplete positions.
-        </p>
-
-        <h3>Education Insights</h3>
-        <p>Most profiles with education data had one listed education record.</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Number of Education Records</th>
-              <th>Profile Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td>1,226</td></tr>
-            <tr><td>2</td><td>230</td></tr>
-            <tr><td>3</td><td>73</td></tr>
-            <tr><td>4</td><td>18</td></tr>
-            <tr><td>5</td><td>6</td></tr>
-          </tbody>
-        </table>
-
-        <p>Top education fields included:</p>
-        <ul>
-          <li>Business Administration and Management</li>
-          <li>Information Technology</li>
-          <li>Computer Science</li>
-          <li>Marketing</li>
-          <li>Accounting</li>
-          <li>Human Resources Management</li>
-          <li>Accounting and Finance</li>
-          <li>Mechanical Engineering</li>
-          <li>Finance</li>
-        </ul>
-        <p>Education start and end years were more complete than work-experience time fields.</p>
-
-        <h3>Key Findings</h3>
-        <ul>
-          <li>The workflow matched 4,070 / 50,000 emails to LinkedIn accounts.</li>
-          <li>2,041 profiles included work-experience information.</li>
-          <li>1,560 profiles included education information.</li>
-          <li>Education data was generally more complete than work-experience data.</li>
-          <li>
-            The enriched attributes can support customer profiling, segmentation, and professional-background analysis
-            when used with proper authorization and privacy controls.
-          </li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>Compliance Note</h2>
-        <p>
-          Use only with authorized accounts and approved data-processing permissions.
-          Credentials, tokens, and personally identifiable data should remain in controlled local/private environments.
-        </p>
+      <section id="pipeline" class="section">
+        <h2>Pipeline</h2>
+        <ol>
+          <li>Email sample → authorized Outlook session token generation</li>
+          <li>Profile lookup via LinkedIn API</li>
+          <li>Classify result: matched / partial / no match / failed</li>
+          <li>Parse structured profile, work-experience, and education data</li>
+          <li>Normalize and aggregate for analytics</li>
+        </ol>
+        <p>All access is session-based — no credential sharing or scraping of non-public data.</p>
       </section>
     </article>
   </main>

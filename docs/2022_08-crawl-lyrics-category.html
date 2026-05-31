@@ -9,96 +9,62 @@
 <body>
   <main class="page">
     <a class="back" href="../index.html#projects">← Back to portfolio</a>
-
     <article class="card">
-      <h1>Crawl Lyrics Category</h1>
+      <h1>Song Lyrics & Category Crawler</h1>
       <p class="meta">VTCODE Company · 2022.08</p>
-
       <p>
-        A Selenium-based crawler that searches for a song by its title and singer,
-        then collects the lyrics and category information from music websites.
+        Selenium-based web scraper that collected <strong>~19,000 songs'</strong> lyrics and genre metadata
+        from <strong>ZingMP3</strong> and <strong>NhacCuaTui</strong> — two major Vietnamese music platforms.
+        Used a clever right-click context menu trick to access hidden song info panels that aren't
+        exposed on the normal search page.
       </p>
 
       <div class="actions">
-        <a
-          class="btn primary"
-          href="https://github.com/lexuanhoang120/Crawl_Lyrics_Category"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub
-        </a>
-        <a class="btn" href="#approach">View Approach</a>
+        <a class="btn primary" href="https://github.com/lexuanhoang120/Crawl_Lyrics_Category" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn" href="#demo">Demo</a>
+        <a class="btn" href="#approach">Approach</a>
       </div>
 
-      <section class="section">
-        <h2>Demo Preview</h2>
-
+      <section id="demo" class="section">
+        <h2>Demo</h2>
         <div class="demo-gallery">
           <figure>
-            <img
-              src="https://user-images.githubusercontent.com/83819024/217485311-33dc0c82-2b2b-4675-940e-63570e1ee928.png"
-              alt="Song and singer input form"
-            />
-            <figcaption>Users enter the song name and singer name.</figcaption>
+            <img src="https://user-images.githubusercontent.com/83819024/217485311-33dc0c82-2b2b-4675-940e-63570e1ee928.png" alt="Input: song title and singer CSV" loading="lazy" />
+            <figcaption><strong>Input:</strong> CSV with song titles and singer names.</figcaption>
           </figure>
-
           <figure>
-            <img
-              src="https://user-images.githubusercontent.com/83819024/217482835-62706923-ba5d-4e91-bcd8-48460ea0a739.png"
-              alt="Crawler output showing lyrics and category"
-            />
-            <figcaption>The crawler returns lyrics and category information.</figcaption>
+            <img src="https://user-images.githubusercontent.com/83819024/217482835-62706923-ba5d-4e91-bcd8-48460ea0a739.png" alt="Output: lyrics + genre appended" loading="lazy" />
+            <figcaption><strong>Output:</strong> Lyrics text + genre/category for each song.</figcaption>
           </figure>
         </div>
+        <figure class="media-block">
+          <video controls>
+            <source src="https://user-images.githubusercontent.com/83819024/217488948-4385bf1b-6383-4b4c-81ab-470087de2463.mp4" type="video/mp4" />
+          </video>
+          <figcaption>Crawling in action — search → right-click → context menu → extract lyrics and genre.</figcaption>
+        </figure>
       </section>
 
       <section id="approach" class="section">
         <h2>Approach</h2>
         <ul>
-          <li>Used Selenium to automate browser actions.</li>
-          <li>Searched songs based on title and singer name.</li>
-          <li>Opened the most relevant song page.</li>
-          <li>Extracted lyrics and category information.</li>
-          <li>Cleaned and displayed the final result.</li>
+          <li><strong>ZingMP3 scraping:</strong> The key challenge was that ZingMP3 hides lyrics and genre behind a right-click context menu. The scraper searches for a song, right-clicks the matching result, hovers over "Thông tin bài hát" (Song Info), extracts the genre from the submenu, then clicks "Lời bài hát" (Lyrics) to get the full text.</li>
+          <li><strong>First-character matching:</strong> Confirms the correct search result was selected before extracting data.</li>
+          <li><strong>NhacCuaTui scraping:</strong> Simpler approach — lyrics are exposed directly on the song page.</li>
+          <li><strong>Batched processing:</strong> Songs split into ~2K batches (data_0-2k.csv through data_19k-end.csv) for reliability and resume support.</li>
+          <li><strong>Result:</strong> ~19K songs crawled, 779K successful extractions, 20K failures logged for re-crawling.</li>
         </ul>
       </section>
 
-      <section id="crawling" class="section">
-        <h2>Crawling Demo</h2>
-        <p>
-          The crawler opens the browser, searches for the song, and collects the needed
-          information from the result page.
-        </p>
-
-        <figure class="media-block">
-          <video controls>
-            <source
-              src="https://user-images.githubusercontent.com/83819024/217488948-4385bf1b-6383-4b4c-81ab-470087de2463.mp4"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-          <figcaption>Demo of the crawling workflow.</figcaption>
-        </figure>
-      </section>
-
-      <section id="setup" class="section">
-        <h2>Setup</h2>
-        <ul>
-          <li>Install packages with <code>pip install -r requirements.txt</code>.</li>
-          <li>Download a webdriver that matches your browser version.</li>
-          <li>Open and run the <code>.ipynb</code> file with Jupyter Notebook.</li>
-        </ul>
-      </section>
-
-      <section id="notes" class="section">
-        <h2>Notes</h2>
-        <ul>
-          <li>The webdriver version should match your browser version.</li>
-          <li>Website XPath values may change over time.</li>
-          <li>If the crawler stops working, inspect the website structure again.</li>
-        </ul>
+      <section id="output" class="section">
+        <h2>Output Format</h2>
+        <table>
+          <tr><th>Column</th><th>Description</th></tr>
+          <tr><td><code>title</code></td><td>Song title</td></tr>
+          <tr><td><code>singer</code></td><td>Artist name</td></tr>
+          <tr><td><code>Genre</code></td><td>Category (e.g. "Việt Nam, V-Pop", "Rap Việt")</td></tr>
+          <tr><td><code>Lyric</code></td><td>Full lyrics text, newline-separated</td></tr>
+        </table>
       </section>
     </article>
   </main>

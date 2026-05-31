@@ -9,159 +9,58 @@
 <body>
   <main class="page">
     <a class="back" href="../index.html#projects">← Back to portfolio</a>
-
     <article class="card">
       <h1>Vision-based Communication with Object Tracking</h1>
       <p class="meta">Sejong University VLI Lab · 2025.11</p>
-
       <p>
-        This project combines computer vision and wireless communication to improve beam alignment for moving vehicles.
-        Instead of steering the beam using delayed detections, the system predicts where the vehicle will be at beamforming
-        time, then points the beam to that estimated position. The result is a clear increase in average data rate.
+        Vision-guided predictive beamforming for vehicular communication. Uses <strong>YOLOv11</strong> for vehicle detection,
+        <strong>ByteTrack</strong> for tracking, and <strong>linear position prediction</strong> to overcome perception-to-actuation
+        latency. Evaluated on the <strong>DeepSense 6G</strong> dataset across 3 real-world driving scenarios, improving
+        average data rate by <strong>+20–29%</strong> over conventional delayed-detection beamforming.
       </p>
 
       <div class="actions">
         <a class="btn primary" href="https://github.com/lexuanhoang120/Vision-based-Communication" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#problem">Problem</a>
-        <a class="btn" href="#approach">Approach</a>
+        <a class="btn" href="#demo">Demo</a>
         <a class="btn" href="#results">Results</a>
       </div>
 
-      <section id="problem" class="section">
-        <h2>Problem</h2>
-
-        <p>
-          Beamforming works best when the antenna points exactly at the target. In practice, targets move, and there is always
-          a short delay between perception and action. That delay causes pointing errors, reduces antenna gain, and lowers the
-          final communication rate.
-        </p>
-
-        <h3>Project Objective</h3>
-        <ul>
-          <li>Reduce beam misalignment caused by motion and processing latency.</li>
-          <li>Predict a vehicle's near-future location before assigning the beam.</li>
-          <li>Compare the predictive method against a delayed-detection baseline.</li>
-          <li>Measure communication performance on real driving scenarios.</li>
-        </ul>
-      </section>
-
-      <section id="approach" class="section">
-        <h2>Approach</h2>
-
-        <p>
-          The pipeline starts from a camera stream and ends with a communication-rate estimate. Vehicles are detected,
-          tracked across frames, projected into directional space, and evaluated with a beamforming model. The key step
-          is future-location estimation, which compensates for control delay.
-        </p>
-
-        <h3>High-Level Pipeline</h3>
-        <ol>
-          <li>Detect vehicles in camera frames using an object detection model.</li>
-          <li>Track detected vehicles across frames to preserve object identity over time.</li>
-          <li>Estimate the future bounding box of each tracked vehicle using recent motion history.</li>
-          <li>Convert 2D image positions into 3D directional information.</li>
-          <li>Calculate azimuth and elevation angle differences between predicted and ground-truth target positions.</li>
-          <li>Estimate antenna gain based on angular misalignment.</li>
-          <li>Compute average data rate across a range of SNR values.</li>
-        </ol>
-
-        <h3>Computer Vision Components</h3>
-        <ul>
-          <li>
-            <strong>Object detection:</strong> YOLO11 detects vehicles in each frame (focused on the <code>car</code> class).
-          </li>
-          <li>
-            <strong>Object tracking:</strong> ByteTrack keeps identity continuity across frames.
-          </li>
-          <li>
-            <strong>Future location estimation:</strong> a linear predictor estimates the next bounding box from recent motion.
-          </li>
-        </ul>
-
-        <h3>Baseline vs Proposed Scheme</h3>
-        <ul>
-          <li>
-            <strong>Baseline:</strong> uses the last detected location, so beam direction can lag behind moving targets.
-          </li>
-          <li>
-            <strong>Proposed method:</strong> predicts the vehicle position at action time and steers the beam there.
-          </li>
-        </ul>
-
-        <h3>Evaluation Dataset</h3>
-        <p>
-          Experiments were run on the DeepSense 6G dataset, which includes synchronized camera, GPS, LiDAR, radar,
-          and wireless communication signals. We used three real-world scenarios at 960x540 resolution, each with
-          thousands of frames.
-        </p>
-
-        <h3>Evaluation Setup</h3>
-        <ul>
-          <li><strong>Scenario A:</strong> DeepSense 6G Scenario 13.</li>
-          <li><strong>Scenario B:</strong> DeepSense 6G Scenario 9.</li>
-          <li><strong>Scenario C:</strong> DeepSense 6G Scenario 3.</li>
-          <li><strong>Tracking interval:</strong> 1/30 second.</li>
-          <li><strong>Rate calculation interval:</strong> 10/30 second.</li>
-          <li><strong>SNR range:</strong> 0, 5, 10, 15, 20, 25, and 30 dB.</li>
-          <li><strong>Metric:</strong> average data rate in bps/Hz.</li>
-        </ul>
+      <section id="demo" class="section">
+        <h2>Demo</h2>
+        <div class="demo-gallery">
+          <figure>
+            <img src="https://raw.githubusercontent.com/lexuanhoang120/Vision-based-Communication/main/docs/demo1.png" alt="Demo 1 — prediction-assisted tracking" loading="lazy" />
+            <figcaption>Vehicle detection + tracking + position prediction workflow.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://raw.githubusercontent.com/lexuanhoang120/Vision-based-Communication/main/docs/demo2.png" alt="Demo 2 — communication workflow" loading="lazy" />
+            <figcaption>Beam alignment: predicted position vs. delayed detection.</figcaption>
+          </figure>
+        </div>
       </section>
 
       <section id="results" class="section">
-        <h2>Results</h2>
-
-        <p>
-          The proposed method outperformed the delayed-detection baseline in all three scenarios. Gains were consistently
-          above 20%, showing that short-horizon motion prediction is effective for reducing beamforming error.
-        </p>
-
-        <h3>Overall Performance</h3>
+        <h2>Results — DeepSense 6G Dataset</h2>
         <table>
-          <thead>
-            <tr>
-              <th>Scenario</th>
-              <th>Baseline Rate</th>
-              <th>Proposed Rate</th>
-              <th>Improvement</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Scenario A</td>
-              <td>2.786 bps/Hz</td>
-              <td>3.592 bps/Hz</td>
-              <td>+28.93%</td>
-            </tr>
-            <tr>
-              <td>Scenario B</td>
-              <td>2.999 bps/Hz</td>
-              <td>3.605 bps/Hz</td>
-              <td>+20.19%</td>
-            </tr>
-            <tr>
-              <td>Scenario C</td>
-              <td>2.759 bps/Hz</td>
-              <td>3.529 bps/Hz</td>
-              <td>+27.93%</td>
-            </tr>
-          </tbody>
+          <tr><th>Scenario</th><th>Baseline Rate</th><th>Proposed Rate</th><th>Improvement</th></tr>
+          <tr><td>A (Highway, Scenario 13)</td><td>2.786 bps/Hz</td><td><strong>3.592 bps/Hz</strong></td><td><strong>+28.93%</strong></td></tr>
+          <tr><td>B (Scenario 9)</td><td>2.999 bps/Hz</td><td><strong>3.605 bps/Hz</strong></td><td><strong>+20.19%</strong></td></tr>
+          <tr><td>C (Scenario 3)</td><td>2.759 bps/Hz</td><td><strong>3.529 bps/Hz</strong></td><td><strong>+27.93%</strong></td></tr>
         </table>
+      </section>
 
-        <h3>Key Findings</h3>
-        <ul>
-          <li>All scenarios show higher throughput with prediction-based steering.</li>
-          <li>Best gain: Scenario A with <strong>28.93%</strong> improvement.</li>
-          <li>Most conservative gain: Scenario B with <strong>20.19%</strong>, still substantial.</li>
-          <li>Scenario C remains strong at <strong>27.93%</strong>, close to Scenario A.</li>
-          <li>Future-position estimation is consistently better than relying on delayed detections.</li>
-        </ul>
-
-        <h3>Conclusion</h3>
-        <p>
-          This project shows that adding lightweight prediction to a vision pipeline can materially improve communication quality.
-          By aligning beam steering with where the vehicle will be, not where it was, the system reduces pointing error and raises
-          average data rate by 20%+ across diverse real-world conditions.
-        </p>
+      <section id="pipeline" class="section">
+        <h2>Pipeline</h2>
+        <ol>
+          <li><strong>YOLOv11</strong> detects vehicles in each camera frame (car class)</li>
+          <li><strong>ByteTrack</strong> maintains identity across consecutive frames</li>
+          <li><strong>Linear predictor</strong> estimates the future bounding box from recent motion history</li>
+          <li><strong>2D→3D mapping</strong> converts image coordinates to azimuth/elevation angles</li>
+          <li><strong>Angular error</strong> computed between predicted and ground-truth beam directions</li>
+          <li><strong>Antenna gain</strong> estimated from misalignment</li>
+          <li><strong>Data rate</strong> computed across SNR values (0–30 dB)</li>
+        </ol>
+        <p><strong>Key insight:</strong> The baseline steers the beam toward the <em>last known position</em> — it always lags. The proposed method forecasts <em>where the vehicle will be</em> when the beam forms, cutting pointing error and preserving gain.</p>
       </section>
     </article>
   </main>

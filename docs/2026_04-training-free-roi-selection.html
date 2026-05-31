@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Training-Free ROI Selection | Project Demo & Docs</title>
+  <title>Training-Free ROI Selection | Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
@@ -11,41 +11,27 @@
     <a class="back" href="../index.html#projects">← Back to portfolio</a>
     <article class="card">
       <h1>Training-Free ROI Selection via Semantic Vector Fields</h1>
-      <p class="meta">Vision Language Intelligence Lab · 2026.04 · Second-author research</p>
+      <p class="meta">Sejong University VLI Lab · 2026.04 · Second Author · Under Review at ECCV 2026</p>
       <p>
-        Research on selecting effective refinement regions without retraining, using semantic vector fields for GUI grounding tasks.
+        A training-free method for selecting effective refinement regions in GUI grounding tasks.
+        Uses <strong>semantic vector fields</strong> to identify which parts of a GUI screenshot are most
+        relevant to a given instruction — without any additional training — guiding the refinement
+        process to focus computation where it matters.
       </p>
 
       <div class="actions">
         <a class="btn primary" href="https://github.com/lexuanhoang120" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#docs">Go to Approach</a>
+        <a class="btn" href="#details">Details</a>
       </div>
 
-      <section id="demo" class="section">
-        <h2>Demo</h2>
-        <p>Demo flow: image + query → semantic field generation → ROI proposal → refinement and final grounding output.</p>
+      <section id="details" class="section">
+        <h2>Research Details</h2>
         <ul>
-          <li>Training-free ROI extraction process.</li>
-          <li>Focuses compute on semantically relevant regions.</li>
-          <li>Targets robust performance for complex interfaces.</li>
+          <li><strong>Problem:</strong> GUI grounding models struggle with dense, cluttered screens. Refinement helps but knowing <em>where</em> to refine is as important as how.</li>
+          <li><strong>Our approach:</strong> Semantic vector fields highlight regions of interest based on the alignment between visual features and natural language instructions — no training, no fine-tuning.</li>
+          <li><strong>Integration:</strong> Plugs into existing grounding pipelines at inference time to select ROI for further processing.</li>
+          <li><strong>Status:</strong> Under review at ECCV 2026. Second author — contributed to experiments and analysis.</li>
         </ul>
-      </section>
-
-      <section id="docs" class="section">
-        <h2>Approach</h2>
-        <ul>
-          <!-- <li>Semantic vector field construction for ROI prioritization.</li> -->
-          <!-- <li>Inference-time integration with grounding pipeline.</li> -->
-          <!-- <li>Current status: manuscript submitted to ECCV 2026.</li> -->
-        </ul>
-      </section>
-
-      <!-- <section id="results" class="section">
-        <h2>Results</h2>
-        <ul>
-          <li>Validated the project pipeline with implementation-level tests and example scenarios.</li>
-          <li>Documented key outputs, observed behavior, and practical limitations for deployment or research reuse.</li>
-        </ul> -->
       </section>
     </article>
   </main>

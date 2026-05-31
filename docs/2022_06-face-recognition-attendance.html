@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Face Attendance System | Project Demo & Docs</title>
+  <title>Face Recognition Attendance | Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
@@ -11,65 +11,75 @@
     <a class="back" href="../index.html#projects">← Back to portfolio</a>
     <article class="card">
       <h1>Face Recognition Attendance System</h1>
-      <p class="meta">VTCODE Company · 2022.06 - 2023.03</p>
+      <p class="meta">VTCODE Company · 2022.06 – 2023.03</p>
       <p>
-        Camera-based office attendance automation system using face embeddings and matching with registered employee
-        profiles.
+        Real-time face recognition system that automatically clocks employees in and out using an
+        RTSP office camera. Detects faces with <strong>SSD</strong>, tracks them across frames with a
+        <strong>custom centroid tracker</strong>, matches against stored <strong>VGGFace2/ResNet50 embeddings</strong>
+        via cosine similarity, logs to <strong>SQLite</strong>, and greets employees by name with
+        <strong>Vietnamese text-to-speech</strong>.
       </p>
 
       <div class="actions">
         <a class="btn primary" href="https://github.com/lexuanhoang120/Face_Recognition" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#docs">Go to Approach</a>
+        <a class="btn" href="#demo">Demo</a>
+        <a class="btn" href="#approach">Approach</a>
       </div>
 
       <section id="demo" class="section">
-        <h2>Demo</h2>
-        <p>
-          Demo flow: live camera feed → face detection and embedding extraction → identity matching → attendance event
-          logging.
-        </p>
+        <h2>Demo — Real-time Recognition</h2>
         <div class="video-wrap">
           <video controls poster="https://user-images.githubusercontent.com/83819024/217433133-f8b8616a-9a52-40f3-8b08-1ef311ddf997.png">
             <source src="https://user-images.githubusercontent.com/83819024/217428805-baf58624-2f68-4c48-a434-0d7f6f9afd88.mp4" type="video/mp4" />
-            Your browser does not support embedded video. You can view it directly
-            <a href="https://user-images.githubusercontent.com/83819024/217428805-baf58624-2f68-4c48-a434-0d7f6f9afd88.mp4" target="_blank" rel="noreferrer">here</a>.
           </video>
         </div>
-        <ul>
-          <li>Recognition accuracy around 97% in deployment setting.</li>
-          <li>Automated check-in/check-out records.</li>
-          <li>Reduced manual attendance administration.</li>
-        </ul>
+        <p>Live camera feed → face detection → embedding extraction → identity matching → attendance logged + voice greeting.</p>
 
-        <div class="demo-evidence">
-          <div class="evidence-card">
-            <h3>Checkin / Checkout Information in Database</h3>
-            <p>MSSQL server stores attendance entries with timestamps and user identity mapping.</p>
-            <img src="https://user-images.githubusercontent.com/83819024/217432644-1208c52a-5b67-47cf-ac02-0c32fd3ef719.png" alt="Check-in / Check-out database records screenshot" />
-          </div>
-          <div class="evidence-card">
-            <h3>Saved Image Verification</h3>
-            <p>Reference image saved to validate attendance events and detect false log entries.</p>
-            <img src="https://user-images.githubusercontent.com/83819024/217433133-f8b8616a-9a52-40f3-8b08-1ef311ddf997.png" alt="Saved image verification screenshot" />
-          </div>
+        <div class="demo-gallery">
+          <figure>
+            <img src="https://user-images.githubusercontent.com/83819024/217432644-1208c52a-5b67-47cf-ac02-0c32fd3ef719.png" alt="Database records" loading="lazy" />
+            <figcaption><strong>Database records:</strong> Check-in/checkout entries with timestamps and accuracy scores.</figcaption>
+          </figure>
+          <figure>
+            <img src="https://user-images.githubusercontent.com/83819024/217433133-f8b8616a-9a52-40f3-8b08-1ef311ddf997.png" alt="Saved verification images" loading="lazy" />
+            <figcaption><strong>Verification snapshots:</strong> Each recognition event saves a face image for audit.</figcaption>
+          </figure>
         </div>
       </section>
 
-      <section id="docs" class="section">
-        <h2>Approach</h2>
+      <section id="pipeline" class="section">
+        <h2>Pipeline</h2>
         <ul>
-          <li>Face detection + embedding-based identity verification.</li>
-          <li>Threshold tuning for false-accept/false-reject balance.</li>
-          <li>Event logging for HR-friendly attendance tracking.</li>
+          <li><strong>Detection:</strong> SSD-based face detector (OpenCV DNN + Caffe model) scans each frame. A separate MobileNetV2 classifier detects face masks — masked faces get a stricter matching threshold.</li>
+          <li><strong>Tracking:</strong> Custom centroid tracker maintains identity across consecutive frames. Faces that disappear for 10+ frames are deregistered. Without tracking, the same person would be re-identified every frame.</li>
+          <li><strong>Recognition:</strong> Detected faces → 224×224 → VGGFace2/ResNet50 → 2048-dim embedding. Compared against pre-computed employee embeddings via cosine distance. Closest match below threshold wins.</li>
+          <li><strong>Attendance logic:</strong> No checkin today? → insert checkin. Checkin exists, no checkout? → insert checkout. Both exist? → update checkout timestamp.</li>
+          <li><strong>Voice greeting:</strong> Vietnamese TTS via Windows SAPI. Morning: "Xin chào [name]". Afternoon: "Tạm biệt [name]".</li>
         </ul>
       </section>
 
       <section id="results" class="section">
         <h2>Results</h2>
         <ul>
-          <li>Validated the project pipeline with implementation-level tests and example scenarios.</li>
-          <li>Documented key outputs, observed behavior, and practical limitations for deployment or research reuse.</li>
+          <li><strong>~97% recognition accuracy</strong> in office deployment.</li>
+          <li>Real-time performance on a single machine with RTSP camera input.</li>
+          <li>Automatic check-in/checkout eliminated manual attendance tracking.</li>
+          <li>Embeddings pre-computed from 1–3 photos per employee — no per-person model training needed.</li>
         </ul>
+      </section>
+
+      <section id="tech" class="section">
+        <h2>Tech Stack</h2>
+        <table>
+          <tr><th>Layer</th><th>Technology</th></tr>
+          <tr><td>Detection</td><td>OpenCV DNN + SSD Caffe model</td></tr>
+          <tr><td>Mask check</td><td>Custom MobileNetV2 classifier</td></tr>
+          <tr><td>Embeddings</td><td>VGGFace2 / ResNet50 (TensorFlow)</td></tr>
+          <tr><td>Matching</td><td>Cosine distance over 2048-dim vectors</td></tr>
+          <tr><td>Tracking</td><td>Custom centroid tracker (Euclidean distance)</td></tr>
+          <tr><td>Database</td><td>SQLite</td></tr>
+          <tr><td>Voice</td><td>pyttsx3 + Windows Vietnamese SAPI</td></tr>
+        </table>
       </section>
     </article>
   </main>
