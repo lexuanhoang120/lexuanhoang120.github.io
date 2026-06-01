@@ -3,70 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Web Face Recognition | Project Docs</title>
+  <title>Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
-  <main class="page">
-    <a class="back" href="../index.html#projects">← Back to portfolio</a>
-    <article class="card">
-      <h1>Web Face Recognition Platform</h1>
-      <p class="meta">VTCODE Company · 2022.10 · Back-end Developer</p>
-      <p>
-        Full-stack face recognition management platform — <strong>React</strong> frontend + <strong>FastAPI</strong> backend + <strong>MongoDB</strong>.
-        <strong>My role:</strong> built the entire back-end — REST APIs, database schema, face detection/embedding pipeline, and real-time event dashboard.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/lexuanhoang120/Web_Face_Recognition" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#demo">Demo</a>
-        <a class="btn" href="#architecture">Architecture</a>
-      </div>
-
-      <section id="demo" class="section">
-        <h2>Demo</h2>
-        <div class="demo-gallery">
-          <figure>
-            <img src="https://user-images.githubusercontent.com/83819024/219291144-c7dea7b3-74b6-4705-bd0c-e83555d58abf.png" alt="Login page" loading="lazy" />
-            <figcaption>Login with SHA-256 hashed password authentication.</figcaption>
-          </figure>
-          <figure>
-            <img src="https://user-images.githubusercontent.com/83819024/219291300-eb970e6f-8644-4a2f-9b17-53ebf88074a2.png" alt="Dashboard view" loading="lazy" />
-            <figcaption>Dashboard — real-time recognition event feed.</figcaption>
-          </figure>
-        </div>
-        <div class="demo-gallery">
-          <figure>
-            <img src="https://user-images.githubusercontent.com/83819024/219296179-f8bf4c58-e320-432d-834f-b51c4b2585cd.png" alt="MongoDB collection" loading="lazy" />
-            <figcaption>MongoDB: list_information, embedding_face, list_storage, dashboard_storage.</figcaption>
-          </figure>
-          <figure>
-            <img src="https://user-images.githubusercontent.com/83819024/219296233-bc5526d0-87e2-4573-98ee-474e191bc9fd.png" alt="MongoDB embedding collection" loading="lazy" />
-            <figcaption>Face embeddings stored as 2048-dim arrays with image paths.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section id="architecture" class="section">
-        <h2>Back-end Architecture (my work)</h2>
-        <table>
-          <tr><th>Layer</th><th>Technology</th></tr>
-          <tr><td>Framework</td><td>FastAPI (Python), Uvicorn, port 9000</td></tr>
-          <tr><td>Database</td><td>MongoDB</td></tr>
-          <tr><td>Face detection</td><td>MTCNN (PyTorch) — rejects 0 or 2+ face images at API level</td></tr>
-          <tr><td>Face embeddings</td><td>VGGFace2 / ResNet50 (Keras) — async via FastAPI BackgroundTasks</td></tr>
-          <tr><td>Tracking</td><td>Custom centroid tracker (Euclidean distance)</td></tr>
-          <tr><td>Auth</td><td>SHA-256 hashed passwords, token-based</td></tr>
-        </table>
-        <h3>Key Design Decisions</h3>
-        <ul>
-          <li><strong>Async embeddings:</strong> VGGFace2 runs in background — HTTP response returns immediately.</li>
-          <!-- <li><strong>No N+1:</strong> MongoDB $lookup joins 3 collections in a single query.</li> -->
-          <li><strong>Single-face enrollment:</strong> Detection rejects multi-face uploads.</li>
-          <li><strong>Consistent API format:</strong> All endpoints return <code>{data, errorCode, message, errors}</code>.</li>
-        </ul>
-      </section>
-    </article>
-  </main>
+  <main class="page" data-project-doc></main>
+  <script src="project-docs-data.js"></script>
+  <script src="project-pages.js"></script>
 </body>
 </html>

@@ -17,6 +17,7 @@ body {
   line-height: 1.6;
   color: var(--text);
   background: var(--bg);
+  overflow-wrap: anywhere;
 }
 
 a {
@@ -26,6 +27,41 @@ a {
 .page {
   width: min(920px, 92%);
   margin: 38px auto;
+}
+
+.doc-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.doc-lang-switcher {
+  display: flex;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  padding: 3px;
+}
+
+.doc-lang-btn {
+  width: 34px;
+  height: 30px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.doc-lang-btn.active {
+  background: #172031;
+  color: #fff;
 }
 
 .card {
@@ -48,6 +84,11 @@ p {
 .meta {
   margin-top: 4px;
   font-size: 0.92rem;
+}
+
+.project-intro,
+.section-body {
+  overflow-wrap: anywhere;
 }
 
 .actions {
@@ -99,6 +140,8 @@ table {
   border-collapse: collapse;
   margin: 10px 0 14px;
   font-size: 0.92rem;
+  display: block;
+  overflow-x: auto;
 }
 
 th,
@@ -113,7 +156,7 @@ th {
   color: #34415b;
 }
 
-..video-wrap {
+.video-wrap {
   margin: 16px 0;
   max-width: 100%;
   overflow: hidden;
@@ -164,7 +207,6 @@ th {
 
 .back {
   display: inline-block;
-  margin-bottom: 14px;
   font-size: 0.92rem;
 }
 
@@ -233,5 +275,30 @@ th {
 @media (max-width: 768px) {
   .media-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    width: min(100% - 28px, 920px);
+    margin: 24px auto;
+  }
+
+  .doc-topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  h1 {
+    font-size: 1.45rem;
+    line-height: 1.25;
+  }
+
+  .actions .btn {
+    width: 100%;
   }
 }

@@ -3,34 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CGAR — GUI Grounding | Project Docs</title>
+  <title>Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
-  <main class="page">
-    <a class="back" href="../index.html#projects">← Back to portfolio</a>
-    <article class="card">
-      <h1>CGAR: Confidence-Guided Adaptive Refinement for GUI Grounding</h1>
-      <p class="meta">Sejong University VLI Lab · 2026.03 · First Author · Previously submitted to CVPR 2026</p>
-      <p>
-        Early-stage research on training-free adaptive refinement for GUI grounding.
-        CGAR was the initial iteration that explored using <strong>confidence signals from attention maps</strong>
-        to control when and how to refine GUI element localization. Although rejected from CVPR 2026,
-        the core ideas evolved into <strong>DART</strong> (Density-Aware Adaptive Refinement Technique) —
-        which achieved top-1 ScreenSpot-Pro performance and is now under review at IEEE Access.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/lexuanhoang120/Confidence-Guided-Adaptive-Refinement" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#evolution">Evolution → DART</a>
-      </div>
-
-        <p>
-          The rejection from CVPR 2026 provided valuable reviewer feedback that led to the key revision
-          in DART.
-        </p>
-      </section>
-    </article>
-  </main>
+  <main class="page" data-project-doc></main>
+  <script src="project-docs-data.js"></script>
+  <script src="project-pages.js"></script>
 </body>
 </html>

@@ -3,63 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DART — GUI Grounding | Project Docs</title>
+  <title>Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
-  <main class="page">
-    <a class="back" href="../index.html#projects">← Back to portfolio</a>
-    <article class="card">
-      <h1>DART: Density-Aware Adaptive Refinement for GUI Grounding</h1>
-      <p class="meta">Sejong University VLI Lab · 2026.05 · First Author · Under Review at IEEE Access</p>
-      <p>
-        A <strong>training-free</strong> adaptive refinement method for GUI grounding in computer-use agents.
-        DART uses <strong>attention map density</strong> from intermediate VLM layers as a signal to determine
-        when to stop and how to crop. On ScreenSpot-Pro, improves <strong>KV-Ground-8B from 73.0% to 80.9%</strong> —
-        achieving <strong>top-1 leaderboard</strong> performance competitive with much larger models.
-        Works with both attention-based and direct-coordinate-prediction models.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/lexuanhoang120/Density-Aware-Adaptive-Refinement-Technique" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#demo">Demo</a>
-        <a class="btn" href="#results">Results</a>
-      </div>
-
-      <section id="demo" class="section">
-        <h2>Demo</h2>
-        <div class="demo-gallery">
-          <figure>
-            <img src="https://raw.githubusercontent.com/lexuanhoang120/Density-Aware-Adaptive-Refinement-Technique/main/docs/demo.png" alt="DART adaptive refinement workflow" loading="lazy" />
-            <figcaption>Adaptive refinement: when attention is dispersed → crop and re-run. When concentrated → stop. <em>n</em> = refinement steps.</figcaption>
-          </figure>
-          <figure>
-            <img src="https://raw.githubusercontent.com/lexuanhoang120/Density-Aware-Adaptive-Refinement-Technique/main/docs/demo2.png" alt="Additional DART examples" loading="lazy" />
-            <figcaption>Additional examples across different GUI scenarios and models.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section id="results" class="section">
-        <h2>Results</h2>
-        <table>
-          <tr><th>Dataset</th><th>Model</th><th>Baseline</th><th>+ DART</th><th>Gain</th></tr>
-          <tr><td>ScreenSpot-Pro</td><td>GUI-Actor-7B</td><td>43.8%</td><td><strong>60.5%</strong></td><td><strong>+16.7%</strong></td></tr>
-          <tr><td>ScreenSpot-Pro</td><td>V2P-7B</td><td>49.5%</td><td><strong>64.2%</strong></td><td>+14.7%</td></tr>
-          <tr><td>ScreenSpot-Pro</td><td>KV-Ground-8B</td><td>73.0%</td><td><strong>80.9%</strong></td><td>+7.9%</td></tr>
-          <tr><td>UI-Vision</td><td>GUI-Actor-7B</td><td>21.6%</td><td><strong>31.0%</strong></td><td>+9.4%</td></tr>
-          <tr><td>OSWorld-G</td><td>GUI-Actor-7B</td><td>48.4%</td><td><strong>61.4%</strong></td><td>+13.0%</td></tr>
-        </table>
-        <ul>
-          <li><strong>5 models supported:</strong> KV-Ground-8B, Qwen3-VL-8B, UI-Venus-1.5-8B, GUI-Actor-7B, V2P-7B.</li>
-          <li><strong>3 benchmarks:</strong> ScreenSpot-Pro, UI-Vision, OSWorld-G.</li>
-          <li><strong>Training-free:</strong> No retraining, no architectural changes — works at inference time.</li>
-          <li><strong>Outperforms baselines:</strong> RegionFocus, MVP, and fixed-scale zooming across all model families.</li>
-        </ul>
-      </section>
-
-    
-    </article>
-  </main>
+  <main class="page" data-project-doc></main>
+  <script src="project-docs-data.js"></script>
+  <script src="project-pages.js"></script>
 </body>
 </html>

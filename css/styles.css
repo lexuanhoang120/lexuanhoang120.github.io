@@ -30,6 +30,7 @@ body {
   background: var(--bg);
   position: relative;
   overflow-x: hidden;
+  overflow-wrap: anywhere;
 }
 
 a {
@@ -123,6 +124,40 @@ nav {
   color: var(--text);
 }
 
+.lang-switcher {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.lang-btn {
+  width: 34px;
+  height: 30px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.lang-btn:hover {
+  color: var(--text);
+}
+
+.lang-btn.active {
+  background: #172031;
+  color: #fff;
+}
+
 .hero-wrap {
   padding: 72px 0 40px;
 }
@@ -171,34 +206,6 @@ h1 {
   max-width: 680px;
   font-size: 1.04rem;
   margin-bottom: 22px;
-}
-
-.hero-highlights {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-bottom: 22px;
-}
-
-.highlight {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 11px;
-  box-shadow: var(--shadow-sm);
-}
-
-.highlight strong {
-  display: block;
-  font-size: 1.12rem;
-  line-height: 1.15;
-}
-
-.highlight span {
-  display: block;
-  font-size: 0.78rem;
-  color: var(--muted);
-  margin-top: 4px;
 }
 
 .actions {
@@ -360,6 +367,7 @@ section:nth-of-type(odd):not(.hero-wrap) {
 
 .card p {
   font-size: 0.93rem;
+  overflow-wrap: anywhere;
 }
 
 .project-card {
@@ -620,10 +628,6 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .hero-highlights {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .profile-card {
     max-width: 450px;
   }
@@ -661,10 +665,6 @@ footer {
 
   .hero-description {
     font-size: 0.98rem;
-  }
-
-  .hero-highlights {
-    grid-template-columns: 1fr;
   }
 
   section {

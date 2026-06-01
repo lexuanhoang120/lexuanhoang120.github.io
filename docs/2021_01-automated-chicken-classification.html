@@ -3,80 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chicken Gender Classification | Project Docs</title>
+  <title>Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
-  <main class="page">
-    <a class="back" href="../index.html#projects">← Back to portfolio</a>
-    <article class="card">
-      <h1>Automated Chicken Gender Classification System</h1>
-      <p class="meta">HCMUT Control & Automation Lab · 2021.01 – 2022.06 · Undergraduate Thesis</p>
-      <p>
-        Complete mechatronic system for automatically sorting chickens by gender. Built from scratch:
-        <strong>self-collected the dataset</strong> on a local farm, trained a <strong>custom CNN</strong> (4 conv + 2 dense),
-        designed the mechanical singulation mechanism in CAD, wired the ATMega 2560 control system, and
-        ran live experiments. <strong>Multi-frame majority voting</strong> boosted accuracy from 91.5% to
-        <strong>95.9%</strong>. Dataset and model published on Kaggle.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/lexuanhoang120/Thesis-Design-a-system-classifying-chicken-gender" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="https://www.kaggle.com/datasets/hongxun/dataset-chicken-gender" target="_blank" rel="noreferrer">Kaggle Dataset</a>
-        <a class="btn" href="#results">Results</a>
-      </div>
-
-      <section id="demo" class="section">
-        <h2>Experiments & Animation</h2>
-        <ul>
-          <li><strong>Experiment 1:</strong> Building the model + initial testing — <a href="https://youtu.be/ve8OjjkXJxA" target="_blank" rel="noreferrer">Watch</a></li>
-          <li><strong>Experiment 2:</strong> Results from experiment 1 — <a href="https://youtu.be/6x_dHk-QXaI" target="_blank" rel="noreferrer">Watch</a></li>
-          <li><strong>Experiment 3:</strong> Results from experiment 2 + chicken measurements — <a href="https://youtu.be/hFi8iOCUlrs" target="_blank" rel="noreferrer">Watch</a></li>
-          <li><strong>System animation:</strong> Mechanical design visualization — <a href="https://youtu.be/mFdrJw7o6yE" target="_blank" rel="noreferrer">Watch</a></li>
-        </ul>
-        <div class="demo-gallery">
-          <figure>
-            <img src="https://user-images.githubusercontent.com/83819024/236599165-c0d95c0f-dcd1-41e1-a307-a376479f204d.png" alt="Classification problem" loading="lazy" />
-            <figcaption>Problem: manual chicken sorting is labor-intensive.</figcaption>
-          </figure>
-          <figure>
-            <img src="https://user-images.githubusercontent.com/83819024/236599227-c4ac61c5-38ff-485c-a9b3-18472feb7516.png" alt="CNN model structure" loading="lazy" />
-            <figcaption>CNN architecture — 4 conv layers, 2 dense layers, sigmoid output.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section id="results" class="section">
-        <h2>Results</h2>
-        <table>
-          <tr><th>Experiment</th><th>Method</th><th>Accuracy</th><th>Inference Time</th></tr>
-          <tr><td>1 — Single frame</td><td>One prediction per chicken</td><td><strong>91.5%</strong></td><td>~0.22s</td></tr>
-          <tr><td>2 — Multi-frame voting</td><td>20 frames, majority vote</td><td><strong>95.9%</strong></td><td>~4.56s</td></tr>
-        </table>
-        <p><strong>Improvement:</strong> +4.4 pp from simple ensemble — no model retraining, just capturing more frames.</p>
-      </section>
-
-      <section id="system" class="section">
-        <h2>System Components</h2>
-        <table>
-          <tr><th>Subsystem</th><th>Key Components</th></tr>
-          <tr><td>Computer Vision</td><td>Custom CNN (4 conv + 2 dense), 256×256 RGB input, sigmoid binary output</td></tr>
-          <tr><td>Mechanical</td><td>Singulation cage, pusher mechanism (stepper + timing belt), sorting gate (servo)</td></tr>
-          <tr><td>Electrical & Control</td><td>ATMega 2560, IR sensors E18-D80NK, stepper 57HS56 + TB6600, servo MG996R</td></tr>
-        </table>
-        <p><strong>Full thesis + CAD drawings + kinematic diagrams</strong> available in the GitHub repo.</p>
-      </section>
-
-      <!-- <section id="links" class="section">
-        <h2>Resources</h2>
-        <ul>
-          <li><a href="https://www.kaggle.com/datasets/hongxun/dataset-chicken-gender" target="_blank" rel="noreferrer">Kaggle Dataset</a></li>
-          <li><a href="https://www.kaggle.com/datasets/hongxun/raw-data-chicken-gender" target="_blank" rel="noreferrer">Kaggle Raw Data</a></li>
-          <li><a href="https://www.kaggle.com/datasets/hongxun/classify-chicken-gender" target="_blank" rel="noreferrer">Kaggle Trained Model</a></li>
-          <li><a href="https://www.kaggle.com/datasets/hongxun/material-classify-chicken-gender" target="_blank" rel="noreferrer">Kaggle All Materials</a></li>
-        </ul> -->
-      </section>
-    </article>
-  </main>
+  <main class="page" data-project-doc></main>
+  <script src="project-docs-data.js"></script>
+  <script src="project-pages.js"></script>
 </body>
 </html>

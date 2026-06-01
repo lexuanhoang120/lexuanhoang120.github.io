@@ -3,66 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vision-based Communication | Project Docs</title>
+  <title>Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
-  <main class="page">
-    <a class="back" href="../index.html#projects">← Back to portfolio</a>
-    <article class="card">
-      <h1>Vision-based Communication with Object Tracking</h1>
-      <p class="meta">Sejong University VLI Lab · 2025.11</p>
-      <p>
-        Vision-guided predictive beamforming for vehicular communication. Uses <strong>YOLOv11</strong> for vehicle detection,
-        <strong>ByteTrack</strong> for tracking, and <strong>linear position prediction</strong> to overcome perception-to-actuation
-        latency. Evaluated on the <strong>DeepSense 6G</strong> dataset across 3 real-world driving scenarios, improving
-        average data rate by <strong>+20–29%</strong> over conventional delayed-detection beamforming.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/lexuanhoang120/Vision-based-Communication" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#demo">Demo</a>
-        <a class="btn" href="#results">Results</a>
-      </div>
-
-      <section id="demo" class="section">
-        <h2>Demo</h2>
-        <div class="demo-gallery">
-          <figure>
-            <img src="https://raw.githubusercontent.com/lexuanhoang120/Vision-based-Communication/main/docs/demo1.png" alt="Demo 1 — prediction-assisted tracking" loading="lazy" />
-            <figcaption>Vehicle detection + tracking + position prediction workflow.</figcaption>
-          </figure>
-          <figure>
-            <img src="https://raw.githubusercontent.com/lexuanhoang120/Vision-based-Communication/main/docs/demo2.png" alt="Demo 2 — communication workflow" loading="lazy" />
-            <figcaption>Beam alignment: predicted position vs. delayed detection.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section id="results" class="section">
-        <h2>Results — DeepSense 6G Dataset</h2>
-        <table>
-          <tr><th>Scenario</th><th>Baseline Rate</th><th>Proposed Rate</th><th>Improvement</th></tr>
-          <tr><td>A (Highway, Scenario 13)</td><td>2.786 bps/Hz</td><td><strong>3.592 bps/Hz</strong></td><td><strong>+28.93%</strong></td></tr>
-          <tr><td>B (Scenario 9)</td><td>2.999 bps/Hz</td><td><strong>3.605 bps/Hz</strong></td><td><strong>+20.19%</strong></td></tr>
-          <tr><td>C (Scenario 3)</td><td>2.759 bps/Hz</td><td><strong>3.529 bps/Hz</strong></td><td><strong>+27.93%</strong></td></tr>
-        </table>
-      </section>
-
-      <section id="pipeline" class="section">
-        <h2>Pipeline</h2>
-        <ol>
-          <li><strong>YOLOv11</strong> detects vehicles in each camera frame (car class)</li>
-          <li><strong>ByteTrack</strong> maintains identity across consecutive frames</li>
-          <li><strong>Linear predictor</strong> estimates the future bounding box from recent motion history</li>
-          <li><strong>2D→3D mapping</strong> converts image coordinates to azimuth/elevation angles</li>
-          <li><strong>Angular error</strong> computed between predicted and ground-truth beam directions</li>
-          <li><strong>Antenna gain</strong> estimated from misalignment</li>
-          <li><strong>Data rate</strong> computed across SNR values (0–30 dB)</li>
-        </ol>
-        <p><strong>Key insight:</strong> The baseline steers the beam toward the <em>last known position</em> — it always lags. The proposed method forecasts <em>where the vehicle will be</em> when the beam forms, cutting pointing error and preserving gain.</p>
-      </section>
-    </article>
-  </main>
+  <main class="page" data-project-doc></main>
+  <script src="project-docs-data.js"></script>
+  <script src="project-pages.js"></script>
 </body>
 </html>

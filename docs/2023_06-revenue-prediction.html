@@ -3,64 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Revenue Prediction | Project Docs</title>
+  <title>Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
-  <main class="page">
-    <a class="back" href="../index.html#projects">← Back to portfolio</a>
-    <article class="card">
-      <h1>Revenue Prediction — ICOOL Restaurant Chain</h1>
-      <p class="meta">VTCODE Company · 2022.06 – 2022.10</p>
-      <p>
-        Daily revenue forecasting for <strong>17 ICOOL restaurant locations</strong> using <strong>Facebook Prophet</strong>
-        with logistic growth, custom seasonality, lunar calendar features, and per-store capacity constraints.
-        Projected <strong>~360 tỷ VND</strong> total revenue across a 10-month forecast horizon.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/lexuanhoang120/Revenue_Prediction" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#results">Results</a>
-        <a class="btn" href="#approach">Approach</a>
-      </div>
-
-      <section id="demo" class="section">
-        <h2>Demo</h2>
-        <figure>
-          <img src="https://user-images.githubusercontent.com/83819024/217454515-7bad5414-77a3-425f-a09d-3ecc662eefd0.png" alt="Revenue prediction output chart" loading="lazy" />
-          <figcaption>Daily revenue forecast output for a single store — March through December 2022.</figcaption>
-        </figure>
-      </section>
-
-      <section id="results" class="section">
-        <h2>Results</h2>
-        <table>
-          <tr><th>Store</th><th>Annual Revenue (tỷ VND)</th><th>Store</th><th>Annual Revenue (tỷ VND)</th></tr>
-          <tr><td>CH 7</td><td><strong>40.05</strong></td><td>CH 14</td><td>36.45</td></tr>
-          <tr><td>CH 1</td><td><strong>38.20</strong></td><td>CH 6</td><td>22.31</td></tr>
-          <tr><td>CH 18</td><td>30.89</td><td>CH 4</td><td>20.28</td></tr>
-          <tr><td>CH 10</td><td>29.87</td><td>CH 22</td><td>20.56</td></tr>
-          <tr><td>CH 12</td><td>28.59</td><td>CH 5</td><td>16.18</td></tr>
-          <tr><td>CH 17</td><td>15.49</td><td>CH 9</td><td>13.62</td></tr>
-          <tr><td>CH 13</td><td>12.14</td><td>CH 23</td><td>10.34</td></tr>
-          <tr><td>CH 11</td><td>8.54</td><td>CH 16</td><td>8.04</td></tr>
-          <tr><td>CH 19</td><td>8.19</td><td></td><td></td></tr>
-          <tr><td colspan="4"><strong>Total: ~360 tỷ VND</strong> across all 17 stores (March–December 2022)</td></tr>
-        </table>
-      </section>
-
-      <section id="approach" class="section">
-        <h2>Approach</h2>
-        <ul>
-          <li><strong>Model:</strong> Facebook Prophet with logistic growth — bounded by per-store revenue ceilings and floors based on historical max/min.</li>
-          <li><strong>Custom features:</strong> NFL Sunday/Monday indicators for Vietnamese weekend patterns, lunar calendar holidays (Tết).</li>
-          <li><strong>Parameters:</strong> Weekly seasonality=6, monthly=3, yearly=6, seasonality prior=0.8, holiday prior=9, changepoint prior=0.8.</li>
-          <li><strong>Per-store training:</strong> Each of 17 stores gets its own model. Two training groups — 7 stores trained to Feb 9, 10 stores to Feb 17.</li>
-          <li><strong>Validation:</strong> RMSE against held-out period before final prediction.</li>
-          <li><strong>Output:</strong> 306 daily predictions per store, serialized as JSON models for reload without retraining.</li>
-        </ul>
-      </section>
-    </article>
-  </main>
+  <main class="page" data-project-doc></main>
+  <script src="project-docs-data.js"></script>
+  <script src="project-pages.js"></script>
 </body>
 </html>

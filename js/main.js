@@ -1,4 +1,38 @@
+const supportedLangs = ['en', 'ko', 'vi'];
+const getInitialLang = () => {
+  const params = new URLSearchParams(window.location.search);
+  const queryLang = params.get('lang');
+  const savedLang = localStorage.getItem('lang');
+
+  if (supportedLangs.includes(queryLang)) return queryLang;
+  if (supportedLangs.includes(savedLang)) return savedLang;
+  return 'en';
+};
+
+let currentLang = getInitialLang();
+let portfolioData = portfolioDataAll[currentLang] || portfolioDataAll.en;
+
 const qs = (selector, scope = document) => scope.querySelector(selector);
+const qsa = (selector, scope = document) => scope.querySelectorAll(selector);
+
+const getUi = () => portfolioData.ui || portfolioDataAll.en.ui;
+
+const localizeHref = (href) => {
+  if (!href || href.startsWith('#') || href.startsWith('mailto:') || /^https?:\/\//.test(href)) {
+    return href;
+  }
+
+  if (!/^docs\/.+\.html/.test(href)) {
+    return href;
+  }
+
+  const [basePart, hashPart] = href.split('#');
+  const [path, query = ''] = basePart.split('?');
+  const params = new URLSearchParams(query);
+  params.set('lang', currentLang);
+
+  return `${path}?${params.toString()}${hashPart ? `#${hashPart}` : ''}`;
+};
 
 const createLink = ({ label, href, external, primary, placeholder }) => {
   const elementTag = placeholder || !href ? 'span' : 'a';
@@ -8,7 +42,7 @@ const createLink = ({ label, href, external, primary, placeholder }) => {
   element.className = `btn${primary ? ' primary' : ''}${placeholder || !href ? ' placeholder' : ''}`;
 
   if (elementTag === 'a') {
-    element.href = href;
+    element.href = localizeHref(href);
 
     if (external) {
       element.target = '_blank';
@@ -17,6 +51,12 @@ const createLink = ({ label, href, external, primary, placeholder }) => {
   }
 
   return element;
+};
+
+const appendLabeledText = (parent, labelText, valueText) => {
+  const strong = document.createElement('strong');
+  strong.textContent = `${labelText}:`;
+  parent.append(strong, document.createTextNode(` ${valueText}`));
 };
 
 const appendTags = (parent, tags = []) => {
@@ -35,6 +75,28 @@ const appendTags = (parent, tags = []) => {
   parent.appendChild(container);
 };
 
+const clearAll = () => {
+  qs('.nav-links').innerHTML = '';
+  qs('.hero-eyebrow').textContent = '';
+  qs('.hero-heading').textContent = '';
+  qs('.hero-description').textContent = '';
+  qs('.hero-actions').innerHTML = '';
+  qs('.profile-list').innerHTML = '';
+  qs('#projects .section-subtitle').textContent = '';
+  qs('#projects .project-grid').innerHTML = '';
+  qs('.timeline').innerHTML = '';
+  qs('#cv .section-subtitle').textContent = '';
+  qs('.cv-summary').innerHTML = '';
+  qs('.cv-actions').innerHTML = '';
+  qs('.education-list').innerHTML = '';
+  qs('#references .section-subtitle').textContent = '';
+  qs('#references .references-grid').innerHTML = '';
+  qs('#skills .skills').innerHTML = '';
+  qs('#contact .section-subtitle').textContent = '';
+  qs('#contact .actions').innerHTML = '';
+  qs('footer .container').textContent = '';
+};
+
 const fillNav = () => {
   const navList = qs('.nav-links');
 
@@ -50,21 +112,6 @@ const fillHero = () => {
   qs('.hero-eyebrow').textContent = portfolioData.hero.eyebrow;
   qs('.hero-heading').textContent = portfolioData.hero.heading;
   qs('.hero-description').textContent = portfolioData.hero.description;
-
-  const highlightContainer = qs('.hero-highlights');
-  portfolioData.hero.highlights.forEach(item => {
-    const highlight = document.createElement('article');
-    highlight.className = 'highlight';
-
-    const value = document.createElement('strong');
-    value.textContent = item.value;
-
-    const label = document.createElement('span');
-    label.textContent = item.label;
-
-    highlight.append(value, label);
-    highlightContainer.append(highlight);
-  });
 
   const actionContainer = qs('.hero-actions');
   portfolioData.hero.actions.forEach(item => actionContainer.append(createLink(item)));
@@ -103,10 +150,11 @@ const fillProjects = () => {
     const meta = document.createElement('div');
     meta.className = 'project-meta';
 
-    const domain = project.domain || (project.tags || []).find(tag => tag === 'Industry' || tag === 'Academic');
+    const domain = project.domain || (project.tags || []).find(tag => tag === 'Industry' || tag === 'Academic' || tag === 'Học thuật' || tag === 'Công nghiệp' || tag === '학술' || tag === '산업');
     if (domain) {
       const domainBadge = document.createElement('span');
-      domainBadge.className = `project-domain ${domain.toLowerCase()}`;
+      const domainLower = domain.toLowerCase();
+      domainBadge.className = `project-domain ${domainLower === 'academic' || domainLower === 'học thuật' || domainLower === '학술' ? 'academic' : domainLower === 'industry' || domainLower === 'công nghiệp' || domainLower === '산업' ? 'industry' : ''}`;
       domainBadge.textContent = domain;
       meta.appendChild(domainBadge);
     }
@@ -145,7 +193,8 @@ const fillProjects = () => {
       card.appendChild(metric);
     }
 
-    const detailTags = (project.tags || []).filter(tag => tag !== 'Industry' && tag !== 'Academic');
+    const domainTags = ['Industry', 'Academic', 'Học thuật', 'Công nghiệp', '학술', '산업'];
+    const detailTags = (project.tags || []).filter(tag => !domainTags.includes(tag));
     appendTags(card, detailTags);
 
     if (project.links?.length) {
@@ -241,6 +290,20 @@ const fillExperience = () => {
 
 const fillCv = () => {
   qs('#cv .section-subtitle').textContent = portfolioData.cv.subtitle;
+  const ui = getUi();
+  const previewHref = portfolioData.cv.previewHref || 'docs/HOANG_CV.pdf';
+  const iframe = qs('.cv-preview iframe');
+  iframe.src = `${previewHref}#view=FitH`;
+  iframe.title = ui.cvIframeTitle;
+
+  const fallback = qs('.cv-fallback');
+  fallback.innerHTML = '';
+  const fallbackLink = document.createElement('a');
+  fallbackLink.href = previewHref;
+  fallbackLink.target = '_blank';
+  fallbackLink.rel = 'noreferrer';
+  fallbackLink.textContent = ui.cvFallback.link;
+  fallback.append(ui.cvFallback.before, fallbackLink, ui.cvFallback.after);
 
   const summary = qs('.cv-summary');
   portfolioData.cv.summary.forEach(item => {
@@ -263,6 +326,7 @@ const fillCv = () => {
 
 const fillEducation = () => {
   const educationList = qs('.education-list');
+  const { labels } = getUi();
 
   portfolioData.education.forEach(item => {
     const card = document.createElement('article');
@@ -281,7 +345,7 @@ const fillEducation = () => {
 
     if (item.advisor) {
       const advisor = document.createElement('p');
-      advisor.innerHTML = `<strong>Advisor:</strong> ${item.advisor}`;
+      appendLabeledText(advisor, labels.advisor, item.advisor);
       card.appendChild(advisor);
     }
 
@@ -293,13 +357,13 @@ const fillEducation = () => {
 
     if (item.thesis) {
       const thesis = document.createElement('p');
-      thesis.innerHTML = `<strong>Thesis title:</strong> ${item.thesis}`;
+      appendLabeledText(thesis, labels.thesis, item.thesis);
       card.appendChild(thesis);
     }
 
     if (item.gpa) {
       const gpa = document.createElement('p');
-      gpa.innerHTML = `<strong>GPA:</strong> ${item.gpa}`;
+      appendLabeledText(gpa, labels.gpa, item.gpa);
       card.appendChild(gpa);
     }
 
@@ -310,6 +374,7 @@ const fillEducation = () => {
 const fillReferences = () => {
   qs('#references .section-subtitle').textContent = portfolioData.references.subtitle;
   const referencesGrid = qs('#references .references-grid');
+  const { labels } = getUi();
 
   portfolioData.references.items.forEach(item => {
     const card = document.createElement('article');
@@ -334,16 +399,24 @@ const fillReferences = () => {
     location.className = 'reference-line';
     location.textContent = item.location;
 
-    const phone = document.createElement('p');
-    phone.className = 'reference-line';
-    phone.innerHTML = `<strong>T:</strong> ${item.phone}`;
+    card.append(name, title, department, organization, location);
 
-    card.append(name, title, department, organization, location, phone);
+    if (item.phone) {
+      const phone = document.createElement('p');
+      phone.className = 'reference-line';
+      appendLabeledText(phone, labels.phone, item.phone);
+      card.appendChild(phone);
+    }
 
     if (item.email) {
       const email = document.createElement('p');
       email.className = 'reference-line';
-      email.innerHTML = `<strong>Email:</strong> <a href="mailto:${item.email}">${item.email}</a>`;
+      const label = document.createElement('strong');
+      label.textContent = `${labels.email}:`;
+      const link = document.createElement('a');
+      link.href = `mailto:${item.email}`;
+      link.textContent = item.email;
+      email.append(label, document.createTextNode(' '), link);
       card.appendChild(email);
     }
 
@@ -401,7 +474,64 @@ const initRevealAnimation = () => {
   items.forEach(item => observer.observe(item));
 };
 
+const updateDocumentMetadata = () => {
+  document.documentElement.lang = currentLang;
+  document.title = portfolioData.siteTitle;
+
+  const description = qs('meta[name="description"]');
+  if (description && portfolioData.metaDescription) {
+    description.setAttribute('content', portfolioData.metaDescription);
+  }
+};
+
+const applyUiText = () => {
+  const ui = getUi();
+  const titleMap = ui.sectionTitles;
+
+  Object.entries(titleMap).forEach(([sectionId, title]) => {
+    const titleEl = qs(`#${sectionId} .section-title`);
+    if (titleEl) titleEl.textContent = title;
+  });
+
+  const languageSwitcher = qs('.lang-switcher');
+  if (languageSwitcher) {
+    languageSwitcher.setAttribute('aria-label', ui.languageSwitcherLabel);
+  }
+
+  const profileImage = qs('.profile-photo img');
+  if (profileImage) {
+    profileImage.alt = ui.profileImageAlt;
+  }
+};
+
+const updateLangButtons = () => {
+  const ui = getUi();
+  const buttons = qsa('.lang-btn');
+  buttons.forEach(btn => {
+    const isActive = btn.dataset.lang === currentLang;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    btn.setAttribute('aria-label', ui.languageNames[btn.dataset.lang] || btn.textContent);
+  });
+};
+
+const switchLanguage = (lang) => {
+  if (lang === currentLang) return;
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  portfolioData = portfolioDataAll[lang] || portfolioDataAll.en;
+  updateDocumentMetadata();
+
+  clearAll();
+  createSections();
+  updateLangButtons();
+
+  // Re-scroll to top to see the changes
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
 const createSections = () => {
+  applyUiText();
   fillNav();
   fillHero();
   fillProfile();
@@ -416,6 +546,16 @@ const createSections = () => {
 };
 
 window.addEventListener('DOMContentLoaded', () => {
-  document.title = portfolioData.siteTitle;
+  localStorage.setItem('lang', currentLang);
+  updateDocumentMetadata();
   createSections();
+  updateLangButtons();
+
+  const langButtons = qsa('.lang-btn');
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      if (lang) switchLanguage(lang);
+    });
+  });
 });

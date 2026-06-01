@@ -3,70 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CCTV Video Filtering | Project Docs</title>
+  <title>Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
-  <main class="page">
-    <a class="back" href="../index.html#projects">← Back to portfolio</a>
-    <article class="card">
-      <h1>VLM-Based CCTV Video Filtering</h1>
-      <p class="meta">PIA Space (Lab Internship) · 2025.12 – 2026.02</p>
-      <p>
-        A VLM-powered pipeline that automatically classifies videos as CCTV or non-CCTV footage.
-        Uses <strong>Qwen3-VL-2B</strong> and <strong>InternVL3-2B</strong> with frame sampling and
-        prompt-based inference. Achieved <strong>94.44% accuracy</strong> on a curated test set and
-        <strong>83.53%</strong> on a larger 425-video CCTV-only dataset — prompt engineering with
-        surveillance-specific terminology was the key driver of accuracy.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/lexuanhoang120/CCTV-Video-Filtering" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#demo">Demo</a>
-        <a class="btn" href="#results">Results</a>
-      </div>
-
-      <section id="demo" class="section">
-        <h2>Pipeline Demo</h2>
-        <div class="demo-gallery">
-          <figure>
-            <img src="https://raw.githubusercontent.com/lexuanhoang120/CCTV-Video-Filtering/main/docs/pipeline.png" alt="Pipeline overview" loading="lazy" />
-            <figcaption>End-to-end pipeline: input query → download → filter → refine → anomaly clips.</figcaption>
-          </figure>
-          <figure>
-            <img src="https://raw.githubusercontent.com/lexuanhoang120/CCTV-Video-Filtering/main/docs/prompt.png" alt="Prompt example" loading="lazy" />
-            <figcaption>Prompt design with CCTV-specific terminology — key to achieving 94.44% accuracy.</figcaption>
-          </figure>
-        </div>
-        <p><strong>Output video sample:</strong> <a href="https://www.youtube.com/watch?v=yjukCBvGYSE" target="_blank" rel="noreferrer">YouTube demo</a></p>
-      </section>
-
-      <section id="results" class="section">
-        <h2>Results</h2>
-        <table>
-          <tr><th>Dataset</th><th>Best Model</th><th>Videos</th><th>Accuracy</th></tr>
-          <tr><td>Small labeled test set</td><td>Qwen3-VL-2B</td><td>18</td><td><strong>94.44%</strong></td></tr>
-          <tr><td>Larger internal dataset</td><td>InternVL3-2B</td><td>425</td><td><strong>83.53%</strong></td></tr>
-        </table>
-        <ul>
-          <li><strong>Prompt engineering</strong> had a strong impact — optimized prompts incorporating CCTV terminology (surveillance camera, security footage, fixed camera, incident context) significantly outperformed generic ones.</li>
-          <li>A <strong>grayscale-difference heuristic</strong> was tested as a lightweight non-VLM baseline — useful for pre-filtering but the VLM approach delivered higher accuracy.</li>
-          <li>Target anomaly classes: Fire, Smoke, Violence, Falldown.</li>
-        </ul>
-      </section>
-
-      <section id="pipeline" class="section">
-        <h2>How it works</h2>
-        <ol>
-          <li>Input an anomaly class (fire, smoke, violence, or falldown)</li>
-          <li>Generate search queries with CCTV terminology and download candidate videos</li>
-          <li>Sample representative frames from each video</li>
-          <li>Use VLM prompts to classify CCTV vs. non-CCTV footage</li>
-          <li>Run anomaly detection on filtered CCTV videos (64 frames per video)</li>
-          <li>Save 1–5 second event clips into class-specific folders</li>
-        </ol>
-      </section>
-    </article>
-  </main>
+  <main class="page" data-project-doc></main>
+  <script src="project-docs-data.js"></script>
+  <script src="project-pages.js"></script>
 </body>
 </html>

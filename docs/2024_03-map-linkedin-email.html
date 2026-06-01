@@ -3,66 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LinkedIn Email Enrichment | Project Docs</title>
+  <title>Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
-  <main class="page">
-    <a class="back" href="../index.html#projects">← Back to portfolio</a>
-    <article class="card">
-      <h1>LinkedIn Email Enrichment</h1>
-      <p class="meta">CADS - FPT Corporation · 2024.03</p>
-      <p>
-        Privacy-aware pipeline that maps email records to LinkedIn professional profiles using authorized
-        session-based lookup. Processed <strong>50,000 emails</strong>, matched <strong>4,070 LinkedIn accounts</strong>
-        (8.1% match rate), and enriched with structured work-experience and education data.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/lexuanhoang120/map-linkedin-email" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#demo">Demo</a>
-        <a class="btn" href="#results">Results</a>
-      </div>
-
-      <section id="demo" class="section">
-        <h2>Demo</h2>
-        <div class="demo-gallery">
-          <figure>
-            <img src="https://raw.githubusercontent.com/lexuanhoang120/map-linkedin-email/main/docs/no%20match.png" alt="No match result" loading="lazy" />
-            <figcaption>Email with no LinkedIn match.</figcaption>
-          </figure>
-          <figure>
-            <img src="https://raw.githubusercontent.com/lexuanhoang120/map-linkedin-email/main/docs/demo1.png" alt="Match found" loading="lazy" />
-            <figcaption>Email matched to a LinkedIn profile with professional data.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section id="results" class="section">
-        <h2>Results — 50,000 Email Sample</h2>
-        <table>
-          <tr><th>Stage</th><th>Count</th><th>Rate</th></tr>
-          <tr><td>Emails processed</td><td>50,000</td><td>100%</td></tr>
-          <tr><td>Matched to LinkedIn</td><td><strong>4,070</strong></td><td>8.1%</td></tr>
-          <tr><td>With work-experience data</td><td><strong>2,041</strong></td><td>4.1%</td></tr>
-          <tr><td>With education data</td><td><strong>1,560</strong></td><td>3.1%</td></tr>
-        </table>
-        <p><strong>Top job titles:</strong> Student, Manager, Teacher, Project Manager, Engineer, Software Engineer.</p>
-        <p><strong>Top education fields:</strong> Business Administration, Information Technology, Computer Science, Marketing, Accounting.</p>
-      </section>
-
-      <section id="pipeline" class="section">
-        <h2>Pipeline</h2>
-        <ol>
-          <li>Email sample → authorized Outlook session token generation</li>
-          <li>Profile lookup via LinkedIn API</li>
-          <li>Classify result: matched / partial / no match / failed</li>
-          <li>Parse structured profile, work-experience, and education data</li>
-          <li>Normalize and aggregate for analytics</li>
-        </ol>
-        <p>All access is session-based — no credential sharing or scraping of non-public data.</p>
-      </section>
-    </article>
-  </main>
+  <main class="page" data-project-doc></main>
+  <script src="project-docs-data.js"></script>
+  <script src="project-pages.js"></script>
 </body>
 </html>

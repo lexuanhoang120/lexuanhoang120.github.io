@@ -3,59 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Restaurant Traffic Forecasting | Project Docs</title>
+  <title>Project Docs</title>
   <link rel="stylesheet" href="project-pages.css" />
 </head>
 <body>
-  <main class="page">
-    <a class="back" href="../index.html#projects">← Back to portfolio</a>
-    <article class="card">
-      <h1>Restaurant Traffic Forecasting — Golden Gate</h1>
-      <p class="meta">CADS - FPT Corporation · 2024.01 – 2024.05 · Client: Golden Gate (GGG)</p>
-      <p>
-        Daily guest-count forecasting for <strong>450+ Golden Gate restaurants</strong> across Vietnam.
-        Engineered features, clustered restaurants by behavior patterns, and built separate
-        <strong>XGBoost models</strong> for stable vs. volatile groups. <strong>Reduced features by ~90%</strong>,
-        <strong>training time by ~70%</strong>, and lowered <strong>WAPE from 25.3% to 22.0%</strong> —
-        a 13% improvement over the previous model and 19% better than the client's internal forecast.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="https://github.com/lexuanhoang120/Restaurant-Traffic-Forecasting" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="btn" href="#results">Results</a>
-        <a class="btn" href="#approach">Approach</a>
-      </div>
-
-      <section id="results" class="section">
-        <h2>Results — Jul 2022 – Dec 2023 (18 months)</h2>
-        <table>
-          <tr><th>Forecast Level</th><th>GGG (Client)</th><th>FPT Pilot (Old)</th><th>FPT Opt (Ours)</th></tr>
-          <tr><td>Daily — All</td><td>27.1%</td><td>25.3%</td><td><strong>22.0%</strong></td></tr>
-          <tr><td>Daily — Baseline</td><td>25.6%</td><td>24.6%</td><td><strong>21.3%</strong></td></tr>
-          <tr><td>Daily — Non-baseline</td><td>33.8%</td><td>29.0%</td><td><strong>25.3%</strong></td></tr>
-          <tr><td>Weekly</td><td>16.4%</td><td>17.5%</td><td><strong>13.6%</strong></td></tr>
-          <tr><td>Monthly</td><td>12.2%</td><td>15.5%</td><td><strong>10.9%</strong></td></tr>
-        </table>
-        <ul>
-          <li><strong>13% improvement</strong> over old model (3 pp WAPE).</li>
-          <li><strong>19% improvement</strong> over client's internal forecast (5 pp WAPE).</li>
-          <li>Largest gains on <strong>holidays</strong>: 37.3% → 23.9% WAPE (↓13.4 pp).</li>
-          <li>Stable across 5 trial phases including volatile Tet holiday period.</li>
-        </ul>
-      </section>
-
-      <section id="approach" class="section">
-        <h2>Approach</h2>
-        <ul>
-          <li><strong>Restaurant segmentation:</strong> 5 clusters based on Fourier-derived weekly periodicity and traffic volatility → 2 model strategies (Global for stable, Local for volatile).</li>
-          <li><strong>Feature engineering:</strong> Calendar & time, holiday weights (per-restaurant, per-holiday impact scores with z-score outlier removal), lunar calendar, lag features (1–64 days), rolling statistics.</li>
-          <li><strong>Models:</strong> XGBoost Regressor — Global (n_estimators=300, lr=0.01, depth=8), Local (n_estimators=500, lr=0.02, depth=6).</li>
-          <li><strong>Rolling monthly training:</strong> For forecast month T, train on Jan 2022 through T-1.</li>
-          <li><strong>Preprocessing:</strong> Prophet-based anomaly detection, same-weekday imputation, restaurant eligibility filtering (active status, location, brand, 42-day minimum history).</li>
-          <li><strong>Optimization:</strong> 90% feature reduction, 70% training time reduction, data-driven clustering replacing manual rules.</li>
-        </ul>
-      </section>
-    </article>
-  </main>
+  <main class="page" data-project-doc></main>
+  <script src="project-docs-data.js"></script>
+  <script src="project-pages.js"></script>
 </body>
 </html>
